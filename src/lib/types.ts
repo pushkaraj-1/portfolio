@@ -82,7 +82,17 @@ export interface BlogPost {
   content: string;
 }
 
+export interface NewsItem {
+  id: string;
+  date: string; // e.g. "May 2026", "Feb 2026"
+  content: string; // Markdown / link supported text
+  link?: string;
+  linkText?: string;
+  highlight?: boolean;
+}
+
 export interface SkillCategory {
   name: string;
   skills: string[];
 }
+

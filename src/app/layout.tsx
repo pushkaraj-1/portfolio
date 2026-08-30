@@ -3,6 +3,9 @@ import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
+  // Without this, OG/Twitter image URLs resolve against the per-deployment
+  // Vercel host instead of the canonical domain, which breaks link previews.
+  metadataBase: new URL("https://www.pushkaraj.dev"),
   title: "Pushkaraj Baradkar",
   description:
     "Pushkaraj Baradkar — software engineer and AI researcher.",
