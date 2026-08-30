@@ -22,7 +22,8 @@ export function Navbar({
     { id: "news", label: "news" },
     { id: "publications", label: "publications" },
     { id: "projects", label: "projects" },
-    { id: "experience", label: "experience & outreach" },
+    { id: "repositories", label: "repositories" },
+    { id: "experience", label: "experience & cv" },
   ];
 
   const scrollToSection = (id: string) => {

@@ -76,7 +76,7 @@ export function PublicationsSection({
                       : "bg-blue-50 border-blue-200 text-blue-800"
                   }`}
                 >
-                  [{paper.venue} '{paper.year.toString().slice(-2)}]
+                  [{paper.venue} &apos;{paper.year.toString().slice(-2)}]
                 </span>
               </div>
 

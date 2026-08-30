@@ -7,6 +7,7 @@ import { HeroAbout } from "./HeroAbout";
 import { NewsSection } from "./NewsSection";
 import { PublicationsSection } from "./PublicationsSection";
 import { ProjectsSection } from "./ProjectsSection";
+import { RepositoriesSection } from "./RepositoriesSection";
 import { ExperienceOutreachSection } from "./ExperienceOutreachSection";
 import { Footer } from "./Footer";
 
@@ -44,6 +45,7 @@ export function ResearchFolioView({
         <NewsSection darkMode={darkMode} />
         <PublicationsSection papers={papers} darkMode={darkMode} />
         <ProjectsSection projects={projects} darkMode={darkMode} />
+        <RepositoriesSection darkMode={darkMode} />
         <ExperienceOutreachSection
           experience={experience}
           education={education}
@@ -55,4 +57,3 @@ export function ResearchFolioView({
     </div>
   );
 }
-
