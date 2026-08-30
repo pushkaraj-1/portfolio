@@ -4,64 +4,45 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 @AGENTS.md
 
-## MCP Tools: code-review-graph
+`AGENTS.md` (imported above) is the **authoritative** agent entry point: change routing, the stop sign for gem-owned paths, the three silent failure modes, and the validated command set. Keep it short and ecosystem-neutral. Cross-repo architecture — the wrapper/tag/gem delegation table, feature gating, the v1 config contract, local overrides — lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md); area-to-gem ownership lives in [`docs/BOUNDARIES.md`](docs/BOUNDARIES.md).
 
-**Use the code-review-graph MCP tools before Grep/Glob/Read for any codebase exploration.** The graph is pre-indexed and returns structural context (callers, dependents, imports) in far fewer tokens than file scanning.
+**Read those three before editing anything.** Everything below is Claude-specific or longer-form operational detail that does not belong in the short entry point. Do not restate facts from those files here — link to them.
 
-| Task | Tool to use first |
-|------|-------------------|
-| Find a function/component by name or concept | `semantic_search_nodes` |
-| Understand what calls or imports a given node | `query_graph` (patterns: `callers_of`, `importers_of`, `callees_of`) |
-| See all nodes in a file | `query_graph` pattern=`file_summary` |
-| Assess blast radius of a change | `get_impact_radius` |
-| Review uncommitted changes | `detect_changes` (auto-diffs against HEAD~1) |
-| High-level architecture | `get_architecture_overview` |
-
-Fall back to Grep/Glob/Read only when the graph doesn't cover what you need (e.g. raw file content, CSS values, JSON data files).
-
-## Commands
+## Daily dev loop
 
 ```bash
-npm run dev      # start dev server (Next.js 16, port 3000)
-npm run build    # production build
-npm run lint     # ESLint (no test suite)
+bundle install                                # ruby gems
+bundle exec jekyll serve                      # dev server → http://localhost:4000/al-folio/  (NOTE baseurl)
+bundle exec jekyll build --baseurl /al-folio  # production-style build to _site/
+bash test/integration_distill.sh              # run ONE integration test (any of the seven in test/)
+npm run test:visual:update                    # refresh playwright snapshots after intentional UI change
+bundle exec al-folio upgrade apply --safe     # deterministic codemods (font-weight-* → font-*, remote→local URLs)
+bundle exec al-folio upgrade overrides diff <path>    # then `overrides accept <path>` to acknowledge an override
 ```
 
-## Architecture
+## Optional toolchains
 
-This is a **Next.js 16 / React 19** single-page portfolio. The entire site renders from `src/app/page.tsx`, which is a Server Component that reads all content at build time and passes it down as props to section components — there is no client-side data fetching.
+- **Jupyter posts.** `bin/setup-python-deps` installs _only_ `jupyter` and `nbconvert` (via `pip --user --break-system-packages`) for `jekyll-jupyter-notebook`. It does **not** read `requirements.txt`. Missing `jupyter-nbconvert` is warn-and-continue; notebook rendering is skipped.
+- **Everything else Python.** [`requirements.txt`](requirements.txt) is the fuller list and must be installed separately (`python3 -m pip install -r requirements.txt`): `rendercv[full]` for CV rendering, `scholarly` for `bin/update_scholar_citations.py`, plus `nbconvert` and `pyyaml`.
+- **Responsive images.** `imagemagick.enabled: true` needs ImageMagick `convert` on `PATH`.
+- **Manual deploy.** `bin/deploy` is the manual `gh-pages` build + purgecss + force-push path; CI normally deploys. `purgecss` is not a devDependency — install it with `npm install -g purgecss`.
 
-### Data sources (two kinds)
+## Docker serving model (v1-specific)
 
-**File-system content** — loaded by `src/lib/data.ts` and `src/lib/blog.ts` at request time using `fs.readFileSync`:
-- `content/projects/*.json` — one file per project, typed as `Project` in `src/lib/types.ts`
-- `content/research/*.json` — research papers
-- `content/blog/*.mdx` — blog posts with YAML frontmatter
+`docker compose up -d` bind-mounts the repo to `/srv/jekyll` and runs `bin/entry_point.sh`, which serves with `--force_polling --destination /tmp/_site`. The build output deliberately goes to **container-local `/tmp/_site`, not the bind-mounted `_site`** — writing `_site` back across the host bind mount caused write deadlocks. The container also `inotifywait`s `_config.yml` and restarts Jekyll on change (config edits aren't hot-reloaded by `--watch`). Verify with the `/al-folio` baseurl: `curl -fsS http://127.0.0.1:8080/al-folio/`. `docker-compose-slim.yml` pulls a prebuilt `:slim` image instead of building locally.
 
-**Hardcoded data** — everything else lives in `src/lib/portfolio-data.ts`:
-- `EXPERIENCE`, `EDUCATION`, `SKILLS`, `CONFERENCES`, `ACHIEVEMENTS`, `LINKS`
+## CI gates and the style contract
 
-Adding/editing a project = edit or create a JSON file in `content/projects/`. No code changes needed. Projects are sorted by `year` descending.
+`npm run lint:style-contract` (`test/style_contract.js`) is the automated enforcement of the thin-starter boundary and will fail CI if you cross it. Beyond the forbidden paths listed in `AGENTS.md`, it also asserts that `_config.yml` keeps `theme: al_folio_core` and the required plugins, that the `third_party_libraries` SRI pins are present, and that the `al_math` Gemfile pin stays on a released version rather than a git branch.
 
-### Project image convention
+Other gates:
 
-Screenshots go in `public/images/projects/<name>.png`. Reference them in project JSON as `"screenshot": "/images/projects/<name>.png"`.
+- `unit-tests.yml` — style contract plus all seven `test/integration_*.sh` scripts (`comments`, `plugin_toggles`, `distill`, `bootstrap_compat`, `upgrade_cli`, `css_minify`, `new_plugins`).
+- `visual-regression.yml` — Playwright on chromium + webkit, diffing the candidate build against a `v0.16.3` baseline worktree served on `:4100` via `BASELINE_URL`.
+- `upgrade-check.yml` — `bundle exec al-folio upgrade audit`.
+- `prettier.yml` — Prettier with `@shopify/prettier-plugin-liquid` and `printWidth: 150`. Run `npm run lint:prettier` before pushing; `npx prettier . --write` fixes.
+- `update-tocs.yml` — regenerates `<!--ts-->…<!--te-->` blocks in changed root and `docs/` Markdown files. If you add or rename a heading, expect a follow-up auto-commit on `main`.
 
-### Resume
+## Gem version pins
 
-The downloadable PDF is served from `public/resume.pdf`. To update it, replace that file. All download links in the codebase already point to `/resume.pdf` — no code changes needed.
-
-### Key UI pieces
-
-- **3D background** — `src/components/three/SpaceCanvas.tsx` renders a persistent Three.js/R3F canvas fixed behind all content via `z-index`.
-- **TARS bot** — `src/components/tars/` — a floating chat widget (Interstellar-themed) mounted globally in the layout. Response logic is in `tars-responses.ts`.
-- **TelemetryBar** — a fixed HUD bar at the bottom of the layout (`src/components/layout/TelemetryBar.tsx`).
-- **Section components** in `src/components/sections/` are thin presentational components; they receive all data as props from `page.tsx`.
-
-### Styling
-
-Tailwind CSS v4 with custom design tokens (space/HUD aesthetic). Fonts: Space Grotesk (`font-heading`), Inter (`font-body`), JetBrains Mono (`font-mono`). Custom classes like `text-text-dim`, `bg-space-deep`, `text-cyan-accent` are defined in `src/styles/globals.css`.
-
-### Contact API
-
-`src/app/api/contact/route.ts` — POST endpoint that sends email via the `resend` package. Requires `RESEND_API_KEY` env var.
+`Gemfile` pins every `al-*` gem to an exact released version in `group :al_folio_plugins`, and `_config.yml` lists the same gems under `plugins:`. Read the current pins from the `Gemfile` rather than trusting any version quoted in prose — including here. To test a gem fix against this site, repoint the `Gemfile` at a sibling checkout (`path:`, `git:`, or `branch:`) and `bundle install`; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md#working-on-a-gem-alongside-the-starter). Revert the pin before committing.

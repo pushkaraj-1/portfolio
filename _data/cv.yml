@@ -1,0 +1,132 @@
+cv:
+  name: Pushkaraj Baradkar
+  label: Master's Student in Computer Science | AI Engineer & Researcher
+  email: pushkarajbaradkar1@gmail.com
+  location: Los Angeles, CA & Austin, TX
+  image: prof_pic.jpg
+  summary: Master's student in Computer Science at USC Viterbi specializing in Real-Time AI Systems, Computer Vision/SLAM, and Scalable Personalization Engines. Seeking full-time AI Engineer & Research roles for 2026/2027.
+
+  social_networks:
+    - network: GitHub
+      username: pushks18
+    - network: LinkedIn
+      username: pushks18
+    - network: Google Scholar
+      username: pushkaraj
+
+  sections:
+    Education:
+      - institution: University of Southern California, Viterbi School of Engineering
+        location: Los Angeles, CA
+        url: https://www.usc.edu/
+        area: Computer Science
+        studyType: Master's Degree
+        start_date: 2025-01
+        end_date: 2026-12
+        score: "GPA: 3.73 / 4.00"
+        highlights:
+          - Focus on Real-Time AI Systems, Computer Vision, Deep Learning, and Personalization Infrastructure.
+
+      - institution: University of Mumbai
+        location: Mumbai, India
+        area: Computer Engineering
+        studyType: Bachelor's Degree
+        start_date: 2020-07
+        end_date: 2024-05
+        score: "GPA: 9.13 / 10.00"
+        highlights:
+          - Graduated with Distinction. Published IEEE paper on Blockchain NFT Music streaming.
+
+    Experience:
+      - company: Tabhi
+        position: AI Engineer Intern
+        location: Austin, TX
+        start_date: 2026-05
+        end_date: Present
+        summary: Architected personalized discovery feed (retrieve → rank → re-rank) for 188K-item catalog.
+        highlights:
+          - Engineered hybrid Elasticsearch BM25 + vector retrieval with slot-based re-ranking.
+          - Designed recency-decayed user preference modeling for SASRec and Two-Tower architectures.
+          - Reduced cold-feed latency from 8s to <500 ms via three-tier caching and index pre-warming.
+
+      - company: University of Southern California (USC)
+        position: Software Engineer Intern – Real-Time AI Systems / RA
+        location: Los Angeles, CA
+        start_date: 2025-11
+        end_date: 2026-05
+        summary: Built real-time monocular visual odometry (VO) & topological SLAM pipeline.
+        highlights:
+          - Achieved ~20–25 FPS real-time processing on noisy indoor sequences.
+          - Fused visual odometry with sparse depth and GPS in GTSAM factor graphs, reducing ATE trajectory error from ~95 m to ~1.2 m.
+          - Designed topological semantic memory for open-vocabulary scene understanding.
+
+      - company: Technoriya ERP Solution
+        position: Software Engineer Intern – Backend & APIs
+        location: India
+        start_date: 2023-10
+        end_date: 2023-12
+        summary: Developed scalable backend microservices and APIs supporting cloud ML workflows.
+        highlights:
+          - Optimized RESTful APIs and Firestore queries to achieve 450 ms response times under 1,000 concurrent requests.
+          - Integrated Firebase Auth and Firestore security rules.
+
+    Skills:
+      - name: AI & Machine Learning
+        keywords:
+          - Deep Learning
+          - PyTorch
+          - TensorFlow
+          - Transformers
+          - LLMs
+          - Computer Vision
+          - Visual Odometry / SLAM
+          - GTSAM
+          - LangChain
+          - Elasticsearch / Vector Search
+
+      - name: Languages & Frameworks
+        keywords:
+          - Python
+          - C++
+          - Java
+          - TypeScript
+          - JavaScript
+          - Rust
+          - React.js
+          - Next.js
+          - Node.js
+          - FastAPI
+          - Flask
+          - Express.js
+
+      - name: Cloud, Databases & Infrastructure
+        keywords:
+          - AWS
+          - GCP
+          - Docker
+          - Kubernetes
+          - Redis
+          - MongoDB
+          - PostgreSQL
+          - Supabase
+          - Solana / Anchor
+
+    Honors and Awards:
+      - title: Built AgentPay at Southern California Blockchain Hackathon (SCBC 2026)
+        date: 2026-02
+        awarder: SCBC
+
+      - title: 1st Place Winner – Syrus 2023 Hackathon
+        date: 2023-05
+        awarder: Syrus
+
+      - title: Shortlisted for SIH 2023 Hackathon & IndeHub 2025
+        date: 2023-2025
+
+    Conferences:
+      - title: Southern California Blockchain Conference (SCBC 2026)
+        date: 2026-02
+      - title: Society of Women Engineers (SWE) Conference 2025
+        date: 2025-02
+      - title: Presented paper at IEEE ICSCSS 2023
+        date: 2023-10
