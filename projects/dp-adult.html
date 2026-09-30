@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Differentially Private Analysis of the UCI Adult Dataset — Pushkaraj Baradkar</title>
+<meta name="description" content="A count, a top-3 selection, and a logistic regression released under pure ε-differential privacy with IBM diffprivlib — plus an empirical study of what each design decision actually costs.">
+<meta name="theme-color" content="#1e3a8a">
+<link rel="stylesheet" href="../styles.css?v=d7e26e79">
+<link rel="icon" href="../assets/img/profile.jpeg">
+<script>
+(function(){try{var t=localStorage.getItem('theme');
+if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-header">
+  <nav class="container nav">
+    <div class="nav-left">
+      <a class="nav-brand" href="../index.html">Pushkaraj Baradkar</a>
+      <div class="nav-cta"><a class="btn btn-solid btn-small" href="https://drive.google.com/file/d/10jmVGDUbspW-O4RcJK-UkkevNug94hOk/view?usp=sharing" target="_blank" rel="noopener">View resume</a><a class="btn btn-outline btn-small" href="../assets/resume/resume.pdf" download>Download resume</a></div>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links" id="primary-navigation"><li><a href="../index.html" class="nav-link">About</a></li><li><a href="../news.html" class="nav-link">News</a></li><li><a href="../experience.html" class="nav-link">Experience</a></li><li><a href="../projects.html" class="nav-link active">Projects</a></li><li><a href="../skills.html" class="nav-link">Skills</a></li><li><a href="../education.html" class="nav-link">Education</a></li><li><a href="../activities.html" class="nav-link">Service</a></li>
+        <li class="nav-search"><div class="search-wrap">
+          <input id="site-search" type="search" placeholder="Search…" autocomplete="off"
+                 aria-label="Search the site" data-base="../">
+          <div id="search-results" class="search-results" hidden></div>
+        </div></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation" title="Menu">&#9776;</button>
+    </div>
+  </nav>
+</header>
+<main class="container inner-page">
+  <section class="section">
+    <div class="container">
+      <a class="back-link" href="../projects.html">&larr; All projects</a>
+      <div class="item-meta">Privacy & Trustworthy ML &middot; Sep 2026</div>
+      <h1 class="page-title">Differentially Private Analysis of the UCI Adult Dataset</h1>
+      <div class="section-divider"></div>
+      <p class="page-lede">A count, a top-3 selection, and a logistic regression released under pure ε-differential privacy with IBM diffprivlib — plus an empirical study of what each design decision actually costs.</p>
+      <div class="tag-row"><span class="tag">Differential Privacy</span><span class="tag">diffprivlib</span><span class="tag">scikit-learn</span><span class="tag">Python</span></div>
+      <div class="pub-actions"></div>
+      <div class="prose">
+<p>Three releases over 30,162 census records: how many people earn over $50K, the three most
+common occupations among them, and a logistic regression predicting income. Every mechanism comes
+from IBM <code>diffprivlib</code>; none is hand-implemented. Beyond building them, the study
+measures <strong>what each design decision costs</strong>, using 1,200–3,000 trials per sampling
+experiment and 25 private refits per ε for the model.</p>
+
+<figure class="fig"><a href="../assets/img/diagrams/dp-adult.svg" target="_blank" rel="noopener" title="Open full size"><img src="../assets/img/diagrams/dp-adult.svg" alt="Three DP releases under one privacy budget" loading="lazy"></a></figure>
+
+<h2>Why the budget is not bookkeeping</h2>
+<p>A <strong>differencing attack</strong> asks two aggregate queries that differ by one person and
+subtracts them. Without DP the target is exposed on the first query. At ε = 1 one query pair leaks
+only a little (64.7% attacker accuracy against 50% chance), but <strong>100 repetitions reach
+99.8%</strong>: averaging defeats the noise. Noise stops the single query; only an enforced budget
+stops the repeated one. So a <code>BudgetAccountant</code> caps the three releases at
+<strong>ε = 3</strong> and refuses a fourth query.</p>
+<figure class="fig"><a href="../assets/teppit/figures/fig1_threat_model.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/teppit/figures/fig1_threat_model.png" alt="Differencing attack accuracy vs repeated queries, and released-count distributions" loading="lazy"></a><figcaption>(a) attacker accuracy vs repeated query pairs, 1,500 trials per cell; (b) released count on a log density axis.</figcaption></figure>
+
+<h2>Top-3 selection: the margin decides</h2>
+<p>A list of names cannot be noised directly, so three selection mechanisms were compared at
+matched total ε. The <strong>noisy histogram with report-noisy-max</strong> wins at every ε below 1
+(93.3% exact recovery at ε = 0.1, against 78.3% for PermuteAndFlip and 65.2% for the exponential
+mechanism), even when handicapped with twice the sensitivity. The reason is parallel composition:
+the 14 disjoint buckets cost ε once, while peeling splits ε three ways. PermuteAndFlip beating the
+exponential mechanism matches McKenna &amp; Sheldon (2020).</p>
+<figure class="fig"><a href="../assets/teppit/figures/fig2_selection.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/teppit/figures/fig2_selection.png" alt="Selection mechanism comparison and rank stability" loading="lazy"></a><figcaption>(a) exact top-3 recovery, 1,200 trials per ε; (b) how often each occupation appears in the released top-3.</figcaption></figure>
+<p>Every failure in that table is the same swap: <strong>Sales (970) and Craft-repair (908), 62
+people apart</strong>, trading third place. Selection accuracy is set by the margin between
+candidates, not by dataset size.</p>
+
+<h2>Accuracy hides sign errors</h2>
+<figure class="fig fig-wide"><a href="../assets/teppit/figures/fig3_model_stability.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/teppit/figures/fig3_model_stability.png" alt="Coefficient and accuracy spread over 25 private refits per epsilon" loading="lazy"></a></figure>
+<p>At ε = 0.01 the mean accuracy is 0.69, but individual runs land anywhere from 0.57 to 0.79.
+Worse, the coefficients span roughly −17 to +20, and the median <code>hours_per_week</code>
+coefficient is <strong>negative</strong>: the model learned the opposite of the true relationship
+while still scoring 0.69, because 75% of people are in the majority class. By ε = 0.5 it is
+indistinguishable from the non-private 0.784.</p>
+
+<h2>Ablations</h2>
+<figure class="fig fig-wide"><a href="../assets/teppit/figures/fig4_ablations.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/teppit/figures/fig4_ablations.png" alt="Ablations: sensitivity bug, per-task saturation, and public bounds" loading="lazy"></a></figure>
+<ul>
+<li><strong>A bug that improves your metrics.</strong> The histogram's L1 sensitivity is 2; using
+1 is a natural mistake. The wrong setting scores <em>better</em> at every ε (93.3% vs 75.6% at
+ε = 0.05) while silently spending twice the claimed ε, and nothing in the output reveals it.
+Δ = 1 at ε = 0.05 and Δ = 2 at ε = 0.10 both score exactly 93.3%, since both give noise scale
+20.</li>
+<li><strong>A hypothesis that turned out backwards.</strong> I expected starving the cheap count and
+feeding the model to beat an equal split. It does not: the model saturates around ε = 0.25–0.5,
+while the count keeps improving across the whole range. The better split is count 0.7 / top-3 0.3
+/ model 0.5, a <strong>total of ε = 1.5</strong>: half the privacy cost with comparable utility.</li>
+<li><strong>Correctness is free.</strong> Bounds taken from public metadata instead of the data
+cost nothing measurable. Even deliberately loose bounds (age 0–120, hours 0–168) cost 0.0002
+accuracy, well inside run-to-run noise.</li>
+</ul>
+
+<h2>Two leaks that noise does not fix</h2>
+<ul>
+<li><strong>Histogram keys.</strong> Two occupations have exactly one high earner. Iterating over
+the categories <em>present in the data</em> would reveal that person through the key alone, however
+much noise the value gets. The histogram iterates over a fixed public list of 14 occupations and
+noises the empty buckets too.</li>
+<li><strong>Norm bounds.</strong> A <code>data_norm</code> inferred from the training data is a
+statistic about the most extreme person, released in the clear. Features are scaled with public
+schema ranges and clipped, bounding every row's norm by √3 without looking at the data.</li>
+</ul>
+</div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>&copy; <span id="year"></span> Pushkaraj Baradkar</div>
+    <div class="footer-links"><a href="../index.html">About</a><a href="../news.html">News</a><a href="../experience.html">Experience</a><a href="../projects.html">Projects</a><a href="../skills.html">Skills</a><a href="../education.html">Education</a><a href="../activities.html">Service</a></div>
+  </div>
+</footer>
+<script src="../script.js?v=ed22fb51" defer></script>
+</body>
+</html>

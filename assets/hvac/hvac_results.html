@@ -1,0 +1,764 @@
+<title>HVAC Follow-up Policy Optimization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single paper column (~68ch) with figures allowed to break wider; booktabs tables, numbered figures and captions. */
+:root {
+  --paper: #fbfbfa;
+  --ink: #16191e;
+  --ink-2: #4a505a;
+  --ink-3: #7b818b;
+  --hair: #dde0e4;
+  --panel: #f1f3f5;
+  --ours: #2a78d6;
+  --ours-soft: #e3eefb;
+  --logged: #eb6834;
+  --base: #9aa0a8;
+  --good: #0f8a0f;
+  --bad: #c43a3a;
+
+  --serif: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --measure: 44rem;
+  --wide: 60rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14161a; --ink: #eceef1; --ink-2: #b3b8c0; --ink-3: #858b95;
+    --hair: #2f343b; --panel: #1d2025; --ours: #4a93ea; --ours-soft: #182b42;
+    --logged: #e0632f; --base: #6f757e; --good: #3fb83f; --bad: #e46a6a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14161a; --ink: #eceef1; --ink-2: #b3b8c0; --ink-3: #858b95;
+  --hair: #2f343b; --panel: #1d2025; --ours: #4a93ea; --ours-soft: #182b42;
+  --logged: #e0632f; --base: #6f757e; --good: #3fb83f; --bad: #e46a6a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--serif); font-size: 17px; line-height: 1.62;
+  padding-inline: 20px; padding-block: 48px 80px;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: var(--wide); margin: 0 auto; display: grid; gap: 0; }
+.col { max-width: var(--measure); margin-inline: auto; width: 100%; }
+.wide { max-width: var(--wide); margin-inline: auto; width: 100%; }
+
+/* ---------- Front matter ---------- */
+header.front { padding-bottom: 28px; border-bottom: 1px solid var(--hair); margin-bottom: 36px; }
+.venue { font-family: var(--sans); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 14px; }
+h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; letter-spacing: -.012em; margin: 0 0 14px; text-wrap: balance; }
+.byline { font-family: var(--sans); font-size: 14px; color: var(--ink-2); margin: 0 0 18px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.tags li { font-family: var(--sans); font-size: 12px; color: var(--ink-2); border: 1px solid var(--hair); border-radius: 3px; padding: 2px 8px; }
+
+.abstract { margin: 0 0 8px; }
+.abstract h2 { font-family: var(--sans); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; font-weight: 600; }
+.abstract p { margin: 0; font-size: 16.5px; }
+
+.contrib { margin: 22px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--hair); border: 1px solid var(--hair); }
+.contrib li { background: var(--paper); padding: 14px 16px; min-width: 0; }
+.contrib .k { font-family: var(--mono); font-size: 26px; font-weight: 500; letter-spacing: -.02em; display: block; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.contrib .k.pos { color: var(--ours); }
+.contrib .v { font-family: var(--sans); font-size: 13px; color: var(--ink-2); line-height: 1.4; display: block; margin-top: 4px; }
+
+/* ---------- Body ---------- */
+section { margin-top: 56px; }
+h2.sec { font-family: var(--serif); font-size: 25px; font-weight: 700; margin: 0 0 14px; letter-spacing: -.005em; text-wrap: balance; }
+h2.sec .n { font-family: var(--sans); font-weight: 500; color: var(--ink-3); margin-right: 12px; font-size: 19px; }
+h3 { font-family: var(--sans); font-size: 15px; font-weight: 600; margin: 28px 0 6px; }
+p { margin: 0 0 14px; }
+.col p, .col li { hyphens: auto; }
+code, .m { font-family: var(--mono); font-size: .86em; }
+code { background: var(--panel); padding: 1px 5px; border-radius: 3px; }
+em { font-style: italic; }
+a { color: var(--ours); text-underline-offset: 2px; }
+ul.plain { padding-left: 1.1em; margin: 0 0 14px; }
+ul.plain li { margin-bottom: 6px; }
+.ref { font-family: var(--sans); font-size: .82em; color: var(--ours); font-weight: 500; white-space: nowrap; }
+
+/* ---------- Figures ---------- */
+figure { margin: 30px auto 34px; }
+.fig-body { overflow-x: auto; }
+.panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 28px; }
+.panel-t { font-family: var(--sans); font-size: 13px; font-weight: 600; margin: 0 0 4px; }
+.panel-t .pl { color: var(--ink-3); font-weight: 500; margin-right: 6px; }
+figcaption { font-family: var(--sans); font-size: 13.5px; line-height: 1.55; color: var(--ink-2); margin-top: 12px; max-width: var(--measure); }
+figcaption b { color: var(--ink); font-weight: 600; }
+figure.wide figcaption { margin-inline: auto; }
+svg.chart { width: 100%; height: auto; display: block; overflow: visible; }
+svg text { font-family: var(--sans); }
+.ax { stroke: var(--ink-3); stroke-width: 1; }
+.grid { stroke: var(--hair); stroke-width: 1; }
+.tick { fill: var(--ink-3); font-size: 11px; }
+.axl { fill: var(--ink-2); font-size: 11.5px; }
+.lbl { fill: var(--ink); font-size: 11.5px; font-family: var(--mono) !important; }
+.lbl-2 { fill: var(--ink-2); font-size: 11px; }
+.f-ours { fill: var(--ours); } .s-ours { stroke: var(--ours); }
+.f-logged { fill: var(--logged); } .s-logged { stroke: var(--logged); }
+.f-base { fill: var(--base); } .s-base { stroke: var(--base); }
+.f-paper { fill: var(--paper); }
+.hit { fill: transparent; cursor: default; }
+.hit:hover + .mark, .mark:hover { opacity: .8; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 16px; font-family: var(--sans); font-size: 12.5px; color: var(--ink-2); margin: 0 0 10px; padding: 0; list-style: none; }
+.legend li { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+.sw.ours { background: var(--ours); } .sw.logged { background: var(--logged); } .sw.base { background: var(--base); }
+.sw.line { height: 2px; width: 16px; border-radius: 0; }
+
+/* Pipeline diagram */
+.dg .node { fill: var(--paper); stroke: var(--ink-3); stroke-width: 1; }
+.dg .node.hl { fill: var(--ours-soft); stroke: var(--ours); }
+.dg .node.gate { fill: var(--panel); stroke: var(--ink-3); stroke-dasharray: 4 3; }
+.dg .nt { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.dg .nd { fill: var(--ink-2); font-size: 11px; font-family: var(--mono) !important; }
+.dg .band { fill: var(--ink-3); font-size: 11px; letter-spacing: .08em; font-weight: 600; }
+.dg .wire { fill: none; stroke: var(--ink-2); stroke-width: 1.25; }
+.dg .ah { fill: var(--ink-2); }
+
+/* Tables (booktabs) */
+.tbl { margin: 30px auto 34px; }
+.tbl .cap { font-family: var(--sans); font-size: 13.5px; line-height: 1.55; color: var(--ink-2); margin: 0 0 10px; }
+.tbl .cap b { color: var(--ink); }
+.tscroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 14px; font-variant-numeric: tabular-nums; }
+thead tr:first-child th { border-top: 1.6px solid var(--ink); }
+thead th { font-weight: 600; text-align: right; padding: 8px 10px 7px; border-bottom: 1px solid var(--ink); white-space: nowrap; font-size: 13px; }
+thead th:first-child, tbody td:first-child { text-align: left; }
+thead .grp th { border-bottom: 1px solid var(--hair); text-align: center; color: var(--ink-2); font-weight: 500; font-size: 12px; padding-bottom: 4px; }
+tbody td { padding: 6px 10px; text-align: right; white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 1.6px solid var(--ink); }
+tbody tr.mid td { border-top: 1px solid var(--hair); }
+tbody tr.ours td { background: var(--ours-soft); }
+tbody tr.flag td { background: var(--panel); }
+td.num { font-family: var(--mono); font-size: 13px; }
+td .best { font-weight: 600; }
+td .ci { color: var(--ink-3); font-size: 11.5px; margin-left: 4px; }
+td.pos { color: var(--good); } td.neg { color: var(--bad); }
+td.muted, th.muted { color: var(--ink-3); }
+td .sub { color: var(--ink-3); font-size: 12px; margin-left: 6px; font-family: var(--sans); }
+.tnote { font-family: var(--sans); font-size: 12.5px; color: var(--ink-3); margin-top: 8px; line-height: 1.5; }
+
+/* Algorithm box */
+.algo { border-top: 1.6px solid var(--ink); border-bottom: 1.6px solid var(--ink); margin: 30px auto 34px; font-family: var(--sans); }
+.algo .ah { border-bottom: 1px solid var(--ink); padding: 7px 2px; font-size: 13.5px; }
+.algo .ah b { font-weight: 600; }
+.algo ol { margin: 0; padding: 10px 0 10px 2.4em; font-family: var(--mono); font-size: 13px; line-height: 1.75; }
+.algo li::marker { color: var(--ink-3); font-size: 11px; }
+.algo .kw { font-weight: 600; }
+.algo .cm { color: var(--ink-3); }
+.algo .ind { padding-left: 1.6em; }
+.algo ol li { white-space: nowrap; }
+.algo { overflow-x: auto; }
+.algo .ret { color: var(--ours); font-weight: 500; }
+
+/* Tooltip */
+#tip { position: fixed; pointer-events: none; z-index: 10; background: var(--ink); color: var(--paper); font-family: var(--sans); font-size: 12px; line-height: 1.4; padding: 6px 9px; border-radius: 4px; max-width: 240px; opacity: 0; transition: opacity .08s; }
+#tip.on { opacity: 1; }
+#tip b { font-weight: 600; }
+
+.limits { counter-reset: lim; list-style: none; padding: 0; margin: 0 0 14px; }
+.limits li { counter-increment: lim; padding-left: 2em; position: relative; margin-bottom: 12px; }
+.limits li::before { content: "L" counter(lim); position: absolute; left: 0; top: 2px; font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+
+pre.repro { background: var(--panel); font-family: var(--mono); font-size: 12.5px; line-height: 1.6; padding: 14px 16px; overflow-x: auto; border-radius: 4px; margin: 0 0 14px; }
+footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--hair); font-family: var(--sans); font-size: 13px; color: var(--ink-3); }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; padding-block: 28px 56px; }
+  h2.sec { font-size: 22px; }
+  table { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { #tip { transition: none; } }
+</style>
+
+<main>
+<header class="front col">
+  <p class="venue">Case study · Offline reinforcement learning · 2026</p>
+  <h1>HVAC Follow-up Policy Optimization</h1>
+  <p class="byline">Pushkaraj Baradkar</p>
+  <ul class="tags">
+    <li>Fitted Q-Iteration</li><li>Off-policy evaluation</li><li>Policy distillation</li><li>Safety guardrails</li><li>Python · scikit-learn</li>
+  </ul>
+</header>
+
+<div class="col abstract">
+  <h2>Abstract</h2>
+  <p>After a service visit, an HVAC contractor's assistant has to decide what to do next with each homeowner: stay quiet, check in, nudge an open estimate, ask what is blocking the decision, offer scheduling, touch a membership, park the thread, or hand off to a person. We learn that decision from 90,298 logged steps of an older policy, with no simulator and no way to test on real customers. We fit a Q-function with Fitted Q-Iteration, relabel its greedy actions with hard safety rules, and distil the result into a depth-10 decision tree that ships as a single dependency-free Python file. On 5,000 held-out episodes, three off-policy estimators with different failure modes agree: the shipped policy is worth <b>+15.25</b> per thread (DR +16.79, 95% CI 14.6 to 16.0), against <b>−13.46</b> for the policy that produced the logs and <b>+1.10</b> for sending nothing at all.</p>
+</div>
+
+<ul class="contrib col" aria-label="Headline numbers">
+  <li><span class="k pos">+28.7</span><span class="v">value per thread over the logged policy (DM, held-out)</span></li>
+  <li><span class="k">3 / 3</span><span class="v">off-policy estimators rank the shipped policy first of 9</span></li>
+  <li><span class="k">1.9%</span><span class="v">evaluator error when recovering the logged policy's known value</span></li>
+  <li><span class="k">0 deps</span><span class="v">shipped as 584 lines of stdlib Python, 148 readable leaves</span></li>
+</ul>
+
+<!-- ============ FIGURE 1: SYSTEM ============ -->
+<figure class="wide" id="fig1">
+  <div class="fig-body">
+  <svg class="chart dg" viewBox="0 0 960 430" role="img" aria-labelledby="fig1cap" style="min-width:760px">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker>
+    </defs>
+    <text class="band" x="24" y="26">A · LEARN FROM LOGS — TRAIN SPLIT · 24,000 EPISODES · 74,733 STEPS</text>
+
+    <rect class="node" x="24" y="40" width="164" height="86" rx="3"/>
+    <text class="nt" x="36" y="62">Logged transitions</text>
+    <text class="nd" x="36" y="82">(s, a, r, s′, π_β(a|s))</text>
+    <text class="nd" x="36" y="98">old policy, 8 actions</text>
+    <text class="nd" x="36" y="114">≤ 4 steps / episode</text>
+
+    <rect class="node" x="210" y="40" width="164" height="86" rx="3"/>
+    <text class="nt" x="222" y="62">Feature encoder</text>
+    <text class="nd" x="222" y="82">31 features</text>
+    <text class="nd" x="222" y="98">decision-time fields</text>
+    <text class="nd" x="222" y="114">only (no leakage)</text>
+
+    <rect class="node" x="396" y="40" width="164" height="86" rx="3"/>
+    <text class="nt" x="408" y="62">Fitted Q-Iteration</text>
+    <text class="nd" x="408" y="82">5 rounds, γ = 1</text>
+    <text class="nd" x="408" y="98">boosted trees for</text>
+    <text class="nd" x="408" y="114">Q(s, a), all 8 actions</text>
+
+    <rect class="node" x="582" y="40" width="164" height="86" rx="3"/>
+    <text class="nt" x="594" y="62">Guardrail relabel</text>
+    <text class="nd" x="594" y="82">a* = argmax Q(s, ·)</text>
+    <text class="nd" x="594" y="98">rules override</text>
+    <text class="nd" x="594" y="114">31.3% of labels</text>
+
+    <rect class="node hl" x="768" y="40" width="168" height="86" rx="3"/>
+    <text class="nt" x="780" y="62">Distil to CART</text>
+    <text class="nd" x="780" y="82">depth 10, 148 leaves</text>
+    <text class="nd" x="780" y="98">85.5% fidelity</text>
+    <text class="nd" x="780" y="114">→ policy.py (stdlib)</text>
+
+    <path class="wire" d="M188,83 H208" marker-end="url(#arr)"/>
+    <path class="wire" d="M374,83 H394" marker-end="url(#arr)"/>
+    <path class="wire" d="M560,83 H580" marker-end="url(#arr)"/>
+    <path class="wire" d="M746,83 H766" marker-end="url(#arr)"/>
+    <path class="wire" d="M852,126 V156 H106 V218" marker-end="url(#arr)"/>
+
+    <text class="band" x="24" y="196">B · EVALUATE OFF-POLICY — HELD-OUT SPLIT · 5,000 EPISODES · 15,565 STEPS</text>
+
+    <rect class="node hl" x="24" y="220" width="164" height="72" rx="3"/>
+    <text class="nt" x="36" y="242">Candidate π</text>
+    <text class="nd" x="36" y="262">guardrails first,</text>
+    <text class="nd" x="36" y="278">then tree</text>
+
+    <rect class="node" x="24" y="310" width="164" height="72" rx="3"/>
+    <text class="nt" x="36" y="332">Held-out logs</text>
+    <text class="nd" x="36" y="352">never seen in</text>
+    <text class="nd" x="36" y="368">training</text>
+
+    <path class="wire" d="M188,256 H218 M188,346 H218 M218,246 V374"/>
+    <path class="wire" d="M218,246 H248" marker-end="url(#arr)"/>
+    <path class="wire" d="M218,310 H248" marker-end="url(#arr)"/>
+    <path class="wire" d="M218,374 H248" marker-end="url(#arr)"/>
+
+    <rect class="node" x="250" y="220" width="210" height="52" rx="3"/>
+    <text class="nt" x="262" y="241">SNIPS</text>
+    <text class="nd" x="262" y="260">per step, weights clipped at 10</text>
+    <rect class="node" x="250" y="284" width="210" height="52" rx="3"/>
+    <text class="nt" x="262" y="305">Direct method (FQE)</text>
+    <text class="nd" x="262" y="324">model-based, per episode</text>
+    <rect class="node" x="250" y="348" width="210" height="52" rx="3"/>
+    <text class="nt" x="262" y="369">Doubly robust</text>
+    <text class="nd" x="262" y="388">FQE + importance correction</text>
+
+    <path class="wire" d="M460,246 H486 M460,310 H486 M460,374 H486 M486,246 V374"/>
+    <path class="wire" d="M486,310 H514" marker-end="url(#arr)"/>
+
+    <rect class="node gate" x="516" y="262" width="196" height="96" rx="3"/>
+    <text class="nt" x="528" y="284">Sanity gate</text>
+    <text class="nd" x="528" y="304">score π_β on its own logs</text>
+    <text class="nd" x="528" y="320">truth −13.46, FQE −13.21</text>
+    <text class="nd" x="528" y="336">pass: error 1.9%</text>
+
+    <path class="wire" d="M712,310 H738" marker-end="url(#arr)"/>
+
+    <rect class="node" x="740" y="262" width="196" height="96" rx="3"/>
+    <text class="nt" x="752" y="284">Reported per policy</text>
+    <text class="nd" x="752" y="304">value per episode</text>
+    <text class="nd" x="752" y="320">effective sample size</text>
+    <text class="nd" x="752" y="336">95% bootstrap CI</text>
+  </svg>
+  </div>
+  <figcaption id="fig1cap"><b>Figure 1.</b> System overview. (A) A Q-function is fit to the old policy's logs, its greedy actions are relabelled by hard product rules, and the result is distilled into a decision tree exported as plain Python. (B) Every candidate policy is scored on a held-out split by three estimators that fail in different ways. The evaluator must first recover the logged policy's known value before any other number it reports is used.</figcaption>
+</figure>
+
+<!-- ============ 1. PROBLEM ============ -->
+<section class="col" id="s1">
+  <h2 class="sec"><span class="n">1</span>Problem setting</h2>
+  <p>Each episode is one follow-up thread of at most four decisions. At each step the policy sees the observation (topic, equipment, season, customer signal, touch and ignore counts, patience, and four noisy scores) and returns one of eight actions. <code>PARK_THREAD</code> and <code>ESCALATE_TO_HUMAN</code> end the episode. The logs record the old policy's action, its propensity <span class="m">π_β(a|s)</span>, the reward and the next state, and nothing about actions it did not take.</p>
+  <p>The reward is dominated by one rare, expensive outcome. Opt-outs happen on 7.9% of logged steps and cost −62.6 each, more than half the value of a sale.</p>
+</section>
+
+<div class="tbl col" id="tab1">
+  <p class="cap"><b>Table 1.</b> Outcome structure of the logged data (train + validation, 90,298 steps). Mean reward per outcome, sorted by frequency.</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Outcome</th><th>Steps</th><th>Share</th><th>Mean reward</th></tr></thead>
+    <tbody id="tab1-body"></tbody>
+  </table></div>
+</div>
+
+<div class="col">
+  <p>The risk grows with every touch. <span class="ref">Figure 2a</span> shows the opt-out rate on outbound messages by how many the customer has already received: it more than doubles between the second and third message. <span class="ref">Figure 2b</span> shows that the sales-heavy actions carry the most risk per send. At roughly 9% opt-out and −62.6 per opt-out, an average message starts at about −5.6 in expected value before any upside. The default action should be to wait, and every send has to earn its place.</p>
+</div>
+
+<figure class="wide" id="fig2">
+  <div class="panels">
+    <div><p class="panel-t"><span class="pl">(a)</span>Opt-out rate by messages already sent</p><div id="fig2a"></div></div>
+    <div><p class="panel-t"><span class="pl">(b)</span>Opt-out rate by action</p><div id="fig2b"></div></div>
+  </div>
+  <figcaption><b>Figure 2.</b> Message fatigue in the logged data, outbound actions only (83,098 sends). (a) Opt-out rate jumps from 6.4% to 13.2% at the third message. (b) Service-style actions (<code>CHECK_IN</code>, <code>MEMBERSHIP_TOUCH</code>) carry roughly two-thirds the risk of sales actions. Bar labels show the rate; hover for sample size.</figcaption>
+</figure>
+
+<!-- ============ 2. METHOD ============ -->
+<section class="col" id="s2">
+  <h2 class="sec"><span class="n">2</span>Method</h2>
+  <h3>2.1 Fitted Q-Iteration</h3>
+  <p>We fit <span class="m">Q(s, a)</span> by iterated regression on the training logs. Round one regresses the immediate reward; each later round regresses <span class="m">r + Q<sub>k</sub>(s′, argmax<sub>a′</sub> Q<sub>k</sub>(s′, a′))</span>, and terminal steps bootstrap from zero. Episodes are at most four steps, so we use no discount and five rounds cover the full horizon with one to spare. The regressor is a histogram gradient-boosted tree with the action as a categorical input, which lets one model share structure across all eight actions.</p>
+  <h3>2.2 Guardrails as relabelling, not post-processing</h3>
+  <p>Some decisions should not be left to a model trained on thin data. An unhappy customer is the clearest case: <span class="ref">Table 2</span> shows that every outbound action loses money there, and only a human handoff pays. We encode five such rules and apply them <em>before</em> distillation, so the tree learns the rule boundaries directly. The same rules run again at inference as a first layer (<span class="ref">Algorithm 1</span>), so they hold even where the tree is imperfect.</p>
+</section>
+
+<div class="tbl col" id="tab2">
+  <p class="cap"><b>Table 2.</b> Logged reward when the customer signal is <code>unhappy</code>, by the action the old policy took. Escalation is the only action with a clearly positive return.</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Action taken</th><th>n</th><th>Mean reward</th></tr></thead>
+    <tbody id="tab2-body"></tbody>
+  </table></div>
+</div>
+
+<div class="algo col" id="alg1">
+  <div class="ah"><b>Algorithm 1.</b> Runtime decision, <code>act(o, history)</code></div>
+  <ol>
+    <li><span class="kw">if</span> o.signal = unhappy <span class="kw">or</span> o.service_risk &gt; 0.7 <span class="kw">then return</span> <span class="ret">ESCALATE_TO_HUMAN</span></li>
+    <li><span class="kw">if</span> o.patience ≤ 0 <span class="kw">and</span> o.signal ≠ positive <span class="kw">then return</span> <span class="ret">PARK_THREAD</span></li>
+    <li><span class="kw">if</span> o.ignored_count ≥ 2 <span class="kw">then return</span> <span class="ret">PARK_THREAD</span></li>
+    <li><span class="kw">if</span> messages_sent ≥ 2 <span class="kw">and</span> o.signal ≠ positive <span class="kw">then return</span> <span class="ret">WAIT</span> <span class="cm">  ▹ cap at 2 sends</span></li>
+    <li><span class="kw">if</span> o.topic = membership_renewal <span class="kw">then</span></li>
+    <li><span class="ind"><span class="kw">if</span> positive <span class="kw">and</span> sends &lt; 2 <span class="kw">then return</span> <span class="ret">OFFER_SCHEDULING</span></span></li>
+    <li><span class="ind"><span class="kw">if</span> turn = 0 <span class="kw">and</span> member <span class="kw">and</span> sends = 0 <span class="kw">then return</span> <span class="ret">MEMBERSHIP_TOUCH</span></span></li>
+    <li><span class="ind"><span class="kw">return</span> <span class="ret">WAIT</span></span></li>
+    <li>x ← encode(o) <span class="cm">  ▹ 31 features, decision-time fields only</span></li>
+    <li><span class="kw">return</span> Tree<sub>d=10</sub>(x) <span class="cm">  ▹ distilled from guardrail-relabelled argmax Q</span></li>
+  </ol>
+</div>
+
+<div class="col">
+  <h3>2.3 Distillation</h3>
+  <p>The shipped artifact is a CART tree (depth 10, 148 leaves, balanced class weights, min 50 samples per leaf) trained to imitate the relabelled greedy policy on the 74,733 training states. It reproduces the teacher's action on 85.5% of them (weighted F1 0.87) and is exported as nested <code>if</code>/<code>else</code> statements. That removes the runtime dependency on scikit-learn and gives a reviewer a policy they can read line by line. <span class="ref">Section 5</span> measures what the distillation costs.</p>
+</div>
+
+<!-- ============ 3. EVALUATION ============ -->
+<section class="col" id="s3">
+  <h2 class="sec"><span class="n">3</span>Evaluation protocol</h2>
+  <p>With no simulator and no live traffic, each policy is scored on the 5,000 held-out episodes by three estimators. <b>SNIPS</b> reweights logged rewards by <span class="m">π(a|s)/π_β(a|s)</span>, clipped at 10 and self-normalised; it is model-free but only sees steps where the candidate agrees with the log, so it is reported per step. The <b>direct method</b> fits a fresh Fitted Q-Evaluation model for each candidate and reads its value at turn 0. <b>Doubly robust</b> starts from the FQE prediction and corrects it with importance-weighted residuals, and is consistent if either the model or the weights are right. When DM and DR agree, the two ways of being wrong have not both happened.</p>
+  <p>Before trusting any of this we score the old policy on its own logs, where the answer is known.</p>
+</section>
+
+<div class="tbl col" id="tab3">
+  <p class="cap"><b>Table 3.</b> Evaluator sanity check on the held-out split. The target policy is set equal to the logging policy, so the true value is the empirical mean return.</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Quantity</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Empirical mean episode return (ground truth)</td><td class="num">−13.46</td></tr>
+      <tr><td>FQE estimate at turn 0</td><td class="num">−13.21</td></tr>
+      <tr><td>Absolute error</td><td class="num">0.26 <span class="sub">(1.9%)</span></td></tr>
+      <tr class="mid"><td>SNIPS with π = π_β (all weights 1)</td><td class="num">−4.33</td></tr>
+      <tr><td>Empirical mean reward per step</td><td class="num">−4.33</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- ============ 4. RESULTS ============ -->
+<section class="col" id="s4">
+  <h2 class="sec"><span class="n">4</span>Main results</h2>
+  <p><span class="ref">Table 4</span> compares the shipped policy with five fixed baselines, the starter rule policy, our own hand-written rule policy, and the logged policy. The bar to clear is <code>always_wait</code> at +1.10, the only positive simple baseline. The old policy scores −13.46 because it messages the customer on 89% of its decisions.</p>
+</section>
+
+<div class="tbl wide" id="tab4">
+  <p class="cap"><b>Table 4.</b> Off-policy value on 5,000 held-out episodes. DM and DR are per episode; SNIPS is per step and not on the same scale. Brackets give 95% bootstrap intervals over episodes (Q-model held fixed). ESS is the Kish effective sample size behind SNIPS. Best value in each column in bold.</p>
+  <div class="tscroll"><table>
+    <thead>
+      <tr><th>Policy</th><th>DM / episode</th><th>DR / episode</th><th>SNIPS / step</th><th>ESS</th><th>Send rate</th></tr>
+    </thead>
+    <tbody id="tab4-body"></tbody>
+  </table></div>
+  <p class="tnote">Send rate is the share of decisions that message the customer, measured on the held-out states. The logged policy's DM entry is its empirical return, not an estimate.</p>
+</div>
+
+<figure class="wide" id="fig3">
+  <div class="panels">
+    <div><p class="panel-t"><span class="pl">(a)</span>Estimated value per episode (DM, 95% CI)</p><div id="fig3a"></div></div>
+    <div><p class="panel-t"><span class="pl">(b)</span>Agreement between DM and DR</p><div id="fig3b"></div></div>
+  </div>
+  <figcaption><b>Figure 3.</b> (a) Direct-method value with bootstrap intervals; the dashed line marks the logged policy's empirical value. The shipped policy's interval, [+14.6, +16.0], does not overlap any baseline's. Intervals are narrow because they reflect evaluation noise over 5,000 episodes only, not Q-model fitting error, so the true uncertainty is wider. (b) Each point is one policy; the diagonal is perfect agreement. DM and DR differ by at most <span id="maxgap">—</span> on every policy, including the ones they rank lowest.</figcaption>
+</figure>
+
+<!-- ============ 5. ABLATIONS ============ -->
+<section class="col" id="s5">
+  <h2 class="sec"><span class="n">5</span>Ablations</h2>
+  <p>We remove one component at a time and re-score each variant with a freshly fitted evaluator. The FQI rows run the full gradient-boosted teacher at inference, which is what the tree is trying to imitate.</p>
+</section>
+
+<div class="tbl wide" id="tab5">
+  <p class="cap"><b>Table 5.</b> Component ablation on the held-out split. Δ is the change in DM against the shipped policy.</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Variant</th><th>DM / episode</th><th>Δ DM</th><th>DR / episode</th><th>SNIPS / step</th><th>Send rate</th></tr></thead>
+    <tbody id="tab5-body"></tbody>
+  </table></div>
+  <p class="tnote" id="tab5-note"></p>
+</div>
+
+<div class="col" id="s5b">
+  <p id="abl-text"></p>
+</div>
+
+<figure class="wide" id="fig4">
+  <div class="panels">
+    <div><p class="panel-t"><span class="pl">(a)</span>Fidelity to the relabelled teacher (train)</p><div id="fig4a"></div></div>
+    <div><p class="panel-t"><span class="pl">(b)</span>Policy value (DM, held-out)</p><div id="fig4b"></div></div>
+  </div>
+  <figcaption><b>Figure 4.</b> Distillation depth sweep. Each tree is trained on the same relabelled targets and run behind the same guardrails. (a) Share of training states where the tree matches the teacher. (b) Held-out value of the resulting policy. The shipped depth is marked. <span id="fig4-extra"></span></figcaption>
+</figure>
+
+<!-- ============ 6. SLICES ============ -->
+<section class="col" id="s6">
+  <h2 class="sec"><span class="n">6</span>Slice analysis</h2>
+  <p>The overall number hides where the gains come from. <span class="ref">Table 6</span> repeats the direct-method evaluation on customer segments. The learned policy is best on three of six slices and overall. Open estimates carry most of the gain. The hand-written rules win on unhappy customers and positive signals, and doing nothing is still best on membership renewal.</p>
+</section>
+
+<div class="tbl wide" id="tab6">
+  <p class="cap"><b>Table 6.</b> DM value per episode by slice, held-out split. A slice includes every step matching the condition; episodes are counted once. Best per row in bold.</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Slice</th><th>Steps</th><th>Episodes</th><th>Shipped (ours)</th><th>Rule policy</th><th>always_wait</th><th>simple_rule</th></tr></thead>
+    <tbody id="tab6-body"></tbody>
+  </table></div>
+</div>
+
+<div class="col">
+  <p>Two of these deserve a plain reading. On unhappy customers, both rule-based policies and ours land near +20 because the escalation guardrail makes the same decision in all three; the learned model contributes nothing there. On membership renewal, an early version of the learned policy scored −4.97 by over-messaging members. A targeted rule (touch once at turn 0, then wait) brought it to −1.29, still below doing nothing. That segment is a known weak spot.</p>
+</div>
+
+<!-- ============ 7. BEHAVIOUR ============ -->
+<section class="col" id="s7">
+  <h2 class="sec"><span class="n">7</span>What the policy does differently</h2>
+  <p><span class="ref">Figure 5</span> compares action frequencies on the same held-out states. The logged policy spends most of its decisions on estimate nudges and objection questions. The learned policy cuts those sharply and moves the volume into waiting, parking stale threads, membership touches, and offering scheduling once a customer has signalled interest.</p>
+</section>
+
+<figure class="wide" id="fig5">
+  <ul class="legend"><li><span class="sw logged"></span>Logged policy</li><li><span class="sw ours"></span>Shipped policy</li></ul>
+  <div id="fig5a"></div>
+  <figcaption><b>Figure 5.</b> Action distribution over the 15,565 held-out decision states. The shipped policy is replayed on the logged policy's states, so this shows its choices, not the path it would have taken on its own. The large <code>PARK_THREAD</code> share partly reflects how many logged threads had already been ignored twice.</figcaption>
+</figure>
+
+<!-- ============ 8. LIMITATIONS ============ -->
+<section class="col" id="s8">
+  <h2 class="sec"><span class="n">8</span>Limitations</h2>
+  <p>These results are offline estimates. They bound what a live test is likely to show; they do not replace one.</p>
+  <ol class="limits">
+    <li><b>No counterfactuals.</b> The logs only record the old policy's choices. It almost never waited on turn 0 of an open estimate, so the value of doing so is extrapolated by the Q-model, not measured.</li>
+    <li><b>Stitched trajectories.</b> FQE chains one-step predictions into trajectories that may never occur in the data. <code>always_wait</code> scores +1.10, yet no logged episode waits at every step.</li>
+    <li><b>Distribution shift.</b> A policy that messages less changes how customers respond later in the thread. The logs describe customers who were messaged often.</li>
+    <li><b>Thin support where errors are costly.</b> <span class="ref">Table 7</span> shows the two terminal actions have the least data, and the new policy uses both more than the old one did.</li>
+  </ol>
+</section>
+
+<div class="tbl col" id="tab7">
+  <p class="cap"><b>Table 7.</b> Data support per action in the held-out logs against how often the shipped policy chooses it. Shaded rows are the two terminal actions.</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Action</th><th>Logged rows</th><th>Logged share</th><th>Shipped share</th></tr></thead>
+    <tbody id="tab7-body"></tbody>
+  </table></div>
+</div>
+
+<div class="col">
+  <h3>Rollout plan</h3>
+  <p>Ship to 5% of traffic behind the existing policy. Track opt-out rate daily and roll back if it exceeds 1.2× the control for three consecutive days. Track escalation volume against CSR capacity, since the new policy escalates every unhappy customer, and roll back if it runs above 3× the offline prediction. Compare the live action mix with <span class="ref">Figure 5</span> weekly; a large gap means the offline states no longer describe live traffic.</p>
+</div>
+
+<section class="col" id="repro">
+  <h2 class="sec"><span class="n">9</span>Reproducibility</h2>
+  <p>All numbers come from the project's own evaluator on the fixed validation split (dataset seed 20260621).</p>
+<pre class="repro">python work/fqi.py --split train --rounds 5   # fit Q, save teacher
+python work/distill.py --max-depth 10         # relabel, distil, export policy.py
+python work/run_baselines.py --split valid    # Table 4 baselines
+python work/slices.py --split valid           # Table 6
+python starter/check_policy.py --policy submission/policy.py</pre>
+</section>
+
+<footer class="col">Pushkaraj Baradkar · 2026 · Offline evaluation only; no customer was contacted by this policy.</footer>
+</main>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const DATA = /*DATA*/{"outcomes": [{"k": "Continue (no reply yet)", "n": 61298, "share": 67.9, "r": -2.62}, {"k": "Episode hit 4 steps", "n": 12181, "share": 13.5, "r": -3.33}, {"k": "Opted out", "n": 7136, "share": 7.9, "r": -62.55}, {"k": "Booked appointment", "n": 2343, "share": 2.6, "r": 33.43}, {"k": "Escalated to human", "n": 2178, "share": 2.4, "r": -15.58}, {"k": "Sold estimate", "n": 1648, "share": 1.8, "r": 116.78}, {"k": "Parked", "n": 1574, "share": 1.7, "r": -5.51}, {"k": "Positive review", "n": 1300, "share": 1.4, "r": 9.75}, {"k": "Membership converted", "n": 640, "share": 0.7, "r": 18.07}], "fatigue": [{"k": "0", "name": "First message", "v": 5.1, "n": 28998}, {"k": "1", "name": "Second message", "v": 6.4, "n": 24320}, {"k": "2", "name": "Third message", "v": 13.2, "n": 19480}, {"k": "3", "name": "Fourth message", "v": 13.6, "n": 11262}], "perAction": [{"k": "CHECK\nIN", "name": "CHECK_IN", "v": 6.4, "n": 16255}, {"k": "MEMBER-\nSHIP", "name": "MEMBERSHIP_TOUCH", "v": 6.9, "n": 4335}, {"k": "ASK\nOBJECTION", "name": "ASK_OBJECTION", "v": 9.5, "n": 18957}, {"k": "ESTIMATE\nNUDGE", "name": "ESTIMATE_NUDGE", "v": 9.7, "n": 28378}, {"k": "OFFER\nSCHED.", "name": "OFFER_SCHEDULING", "v": 10.0, "n": 12383}], "unhappy": [{"k": "ESCALATE_TO_HUMAN", "n": 164, "r": 21.0}, {"k": "WAIT", "n": 257, "r": -0.1}, {"k": "MEMBERSHIP_TOUCH", "n": 193, "r": -7.3}, {"k": "PARK_THREAD", "n": 50, "r": -7.8}, {"k": "CHECK_IN", "n": 911, "r": -11.5}, {"k": "ASK_OBJECTION", "n": 382, "r": -17.4}, {"k": "ESTIMATE_NUDGE", "n": 676, "r": -18.8}, {"k": "OFFER_SCHEDULING", "n": 357, "r": -23.5}], "policies": [{"dm": 15.25, "dr": 16.79, "snips": 11.32, "ess": 1448, "send": 46.9, "ci": [14.56, 16.01], "name": "Shipped: distilled FQI + guardrails", "short": "Shipped (ours)", "ours": true, "lab": "ours", "labAnchor": "end", "labDx": -10, "labDy": -6}, {"dm": 4.35, "dr": 5.55, "snips": 3.68, "ess": 1253, "send": 25.3, "ci": [4.03, 4.66], "name": "Hand-written rule policy", "short": "Rule policy", "lab": "rules"}, {"dm": 1.1, "dr": 0.9, "snips": -0.18, "ess": 1031, "send": 0.0, "ci": [0.93, 1.23], "name": "always_wait", "lab": "wait"}, {"dm": -3.71, "dr": -3.79, "snips": 1.07, "ess": 2547, "send": 78.6, "ci": [-4.18, -3.33], "name": "simple_rule", "note": "starter", "lab": "simple_rule", "labDy": 14}, {"dm": -8.79, "dr": -8.86, "snips": -5.7, "ess": 297, "send": 0.0, "ci": null, "name": "always_park", "lab": "park"}, {"dm": -19.13, "dr": -19.08, "snips": -16.17, "ess": 345, "send": 0.0, "ci": null, "name": "always_escalate", "lab": "escalate", "labDy": -6}, {"dm": -19.58, "dr": -19.45, "snips": -4.57, "ess": 1946, "send": 100.0, "ci": null, "name": "always_check_in", "lab": "check_in", "labDy": 14}, {"dm": -46.39, "dr": -46.53, "snips": -10.5, "ess": 3386, "send": 100.0, "ci": null, "name": "always_estimate_nudge", "short": "always_nudge", "lab": "estimate_nudge"}, {"name": "Logged policy", "short": "Logged", "logged": true, "dm": -13.46, "dr": null, "snips": -4.33, "ess": 15565, "send": 89.2, "note": "ground truth"}], "ablation": [{"name": "Shipped: guardrails + tree (d=10)", "dm": 15.25, "dr": 16.79, "snips": 11.32, "send": 46.9}, {"name": "− guardrails (tree alone)", "dm": 15.24, "dr": 16.53, "snips": 11.07, "send": 49.2}, {"name": "− escalation rule", "dm": 15.6, "dr": 16.82, "snips": 11.32, "send": 47.0}, {"name": "− membership rule", "dm": 15.14, "dr": 16.6, "snips": 11.25, "send": 48.7}, {"name": "− learned model (rules, else WAIT)", "dm": 1.07, "dr": 1.55, "snips": 0.71, "send": 3.1}, {"name": "FQI teacher, no guardrails", "sep": true, "dm": 21.06, "dr": 22.31, "snips": 13.34, "send": 56.5}, {"name": "FQI teacher + guardrails (not distilled)", "dm": 16.14, "dr": 17.85, "snips": 12.08, "send": 42.3}], "depth": [{"d": 2, "fid": 27.8, "f1": 22.5, "leaves": 3, "dm": -7.26, "dr": -6.76}, {"d": 4, "fid": 64.6, "f1": 67.0, "leaves": 9, "dm": 11.85, "dr": 12.94}, {"d": 6, "fid": 75.9, "f1": 76.0, "leaves": 27, "dm": 13.87, "dr": 15.62}, {"d": 8, "fid": 81.5, "f1": 82.6, "leaves": 67, "dm": 14.96, "dr": 16.72}, {"d": 10, "fid": 85.5, "f1": 86.7, "leaves": 148, "dm": 15.25, "dr": 16.79}, {"d": 14, "fid": 87.9, "f1": 88.6, "leaves": 376, "dm": 15.27, "dr": 16.91}], "mix": [{"k": "ESTIMATE_NUDGE", "old": 31.8, "nw": 2.3}, {"k": "ASK_OBJECTION", "old": 20.6, "nw": 9.3}, {"k": "CHECK_IN", "old": 18.3, "nw": 3.7}, {"k": "OFFER_SCHEDULING", "old": 13.5, "nw": 17.4}, {"k": "WAIT", "old": 6.7, "nw": 22.5}, {"k": "MEMBERSHIP_TOUCH", "old": 5.0, "nw": 14.1}, {"k": "ESCALATE_TO_HUMAN", "old": 2.2, "nw": 4.9}, {"k": "PARK_THREAD", "old": 1.9, "nw": 25.7}], "support": [{"k": "ESTIMATE_NUDGE", "n": 4945, "old": 31.8, "nw": 2.3, "thin": false}, {"k": "ASK_OBJECTION", "n": 3201, "old": 20.6, "nw": 9.3, "thin": false}, {"k": "CHECK_IN", "n": 2846, "old": 18.3, "nw": 3.7, "thin": false}, {"k": "OFFER_SCHEDULING", "n": 2097, "old": 13.5, "nw": 17.4, "thin": false}, {"k": "WAIT", "n": 1048, "old": 6.7, "nw": 22.5, "thin": false}, {"k": "MEMBERSHIP_TOUCH", "n": 781, "old": 5.0, "nw": 14.1, "thin": false}, {"k": "ESCALATE_TO_HUMAN", "n": 350, "old": 2.2, "nw": 4.9, "thin": true}, {"k": "PARK_THREAD", "n": 297, "old": 1.9, "nw": 25.7, "thin": true}], "slices": [{"k": "Open estimates", "steps": 5377, "eps": 1671, "ours": 35.93, "rule": 8.48, "wait": 4.57, "simple": 2.88, "overall": false}, {"k": "Turn 0 only", "steps": 5000, "eps": 5000, "ours": 14.59, "rule": 1.66, "wait": -2.04, "simple": 5.02, "overall": false}, {"k": "Weather extreme", "steps": 1860, "eps": 606, "ours": 5.61, "rule": -2.21, "wait": -1.07, "simple": -5.82, "overall": false}, {"k": "Positive signal", "steps": 1438, "eps": 1202, "ours": 14.21, "rule": 15.72, "wait": 0.32, "simple": -0.64, "overall": false}, {"k": "Unhappy customers", "steps": 535, "eps": 432, "ours": 18.56, "rule": 20.36, "wait": -3.6, "simple": 23.31, "overall": false}, {"k": "Membership renewal", "steps": 1920, "eps": 630, "ours": -1.29, "rule": -0.39, "wait": 0.4, "simple": -11.07, "overall": false}, {"k": "Overall", "steps": 15565, "eps": 5000, "ours": 15.25, "rule": 4.35, "wait": 1.1, "simple": -3.71, "overall": true}], "ablationNote": "Each row is scored with its own freshly fitted FQE model on the held-out split. The “−” rows remove a rule at inference only; the tree was still trained on relabelled targets, so it keeps part of that rule’s behaviour.", "ablationText": "Three results stand out. <b>Almost all of the value comes from the learned model.</b> The rules alone, with WAIT as the default, score +1.07, no better than sending nothing. <b>The runtime guardrails act as a guarantee, not a source of value.</b> Without them the tree scores +15.24, because it already learned their boundaries from the relabelled targets. Removing the escalation rule alone scores slightly higher (+15.60): the service-risk trigger escalates some threads the model would handle more cheaply. We keep it, because a missed safety escalation costs far more than the 0.35 per thread the estimate puts on it. <b>Auditability has a measurable price.</b> The undistilled FQI teacher scores +21.06. The guardrails cost 4.9 of that and distilling to a tree costs another 0.9. Part of the teacher’s lead is probably optimism, since an argmax over one Q-model is being scored by another Q-model, and the teacher acts freely in the thin-data states listed in <span class=\"ref\">Table 7</span>. SNIPS uses no model and also prefers it (+13.34 against +11.32), so some of the gap is real. We accept that cost in exchange for a policy a reviewer can read line by line and one that never overrides a safety rule.", "depthNote": "Value climbs steeply to depth 6 and flattens after depth 10. Depth 14 more than doubles the leaves (376 against 148) for +0.02."}/*END*/;
+
+/* ---------- helpers ---------- */
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs = {}, parent) {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function txt(parent, x, y, s, cls, anchor = "start", extra = {}) {
+  const t = el("text", { x, y, class: cls, "text-anchor": anchor, ...extra }, parent);
+  t.textContent = s; return t;
+}
+function svgRoot(host, w, h, label) {
+  const s = el("svg", { viewBox: `0 0 ${w} ${h}`, class: "chart", role: "img", "aria-label": label });
+  document.getElementById(host).appendChild(s); return s;
+}
+const fmt = (v, d = 2) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(d);
+const fmtP = (v, d = 1) => v.toFixed(d) + "%";
+const minus = s => String(s).replace(/-/g, "−");
+const tip = document.getElementById("tip");
+function hover(node, html) {
+  node.addEventListener("pointerenter", () => { tip.innerHTML = html; tip.classList.add("on"); });
+  node.addEventListener("pointermove", e => {
+    const r = tip.getBoundingClientRect();
+    let x = e.clientX + 14, y = e.clientY + 14;
+    if (x + r.width > innerWidth - 8) x = e.clientX - r.width - 14;
+    if (y + r.height > innerHeight - 8) y = e.clientY - r.height - 14;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  });
+  node.addEventListener("pointerleave", () => tip.classList.remove("on"));
+}
+function ticks(min, max, step) { const t = []; for (let v = min; v <= max + 1e-9; v += step) t.push(+v.toFixed(6)); return t; }
+function roundedTopBar(x, y, w, h, r = 3) {
+  if (h <= 0) return "";
+  r = Math.min(r, h, w / 2);
+  return `M${x},${y + h} V${y + r} Q${x},${y} ${x + r},${y} H${x + w - r} Q${x + w},${y} ${x + w},${y + r} V${y + h} Z`;
+}
+function roundedRightBar(x, y, w, h, r = 3) {
+  if (w <= 0) return "";
+  r = Math.min(r, w, h / 2);
+  return `M${x},${y} H${x + w - r} Q${x + w},${y} ${x + w},${y + r} V${y + h - r} Q${x + w},${y + h} ${x + w - r},${y + h} H${x} Z`;
+}
+
+/* ---------- vertical bar chart (Fig 2) ---------- */
+function vbars(host, rows, { yMax, step, xTitle, highlight = () => false, label }) {
+  const W = 440, H = 250, m = { l: 44, r: 10, t: 22, b: 52 };
+  const s = svgRoot(host, W, H, label);
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const y = v => m.t + ih - (v / yMax) * ih;
+  ticks(0, yMax, step).forEach(v => {
+    el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), class: "grid" }, s);
+    txt(s, m.l - 8, y(v) + 4, v + "%", "tick", "end");
+  });
+  const bw = iw / rows.length, barW = Math.min(46, bw * 0.56);
+  rows.forEach((r, i) => {
+    const cx = m.l + bw * i + bw / 2, x = cx - barW / 2;
+    const cls = highlight(r) ? "f-logged" : "f-base";
+    const p = el("path", { d: roundedTopBar(x, y(r.v), barW, y(0) - y(r.v)), class: cls + " mark" }, s);
+    txt(s, cx, y(r.v) - 6, r.v.toFixed(1) + "%", "lbl", "middle");
+    const lines = String(r.k).split("\n");
+    lines.forEach((ln, j) => txt(s, cx, H - m.b + 16 + j * 13, ln, "tick", "middle"));
+    const hit = el("rect", { x: m.l + bw * i, y: m.t, width: bw, height: ih, class: "hit" }, s);
+    hover(hit, `<b>${r.name || r.k.replace("\n", " ")}</b><br>Opt-out ${r.v.toFixed(1)}%<br>n = ${r.n.toLocaleString()} sends`);
+  });
+  el("line", { x1: m.l, x2: W - m.r, y1: y(0), y2: y(0), class: "ax" }, s);
+  if (xTitle) txt(s, m.l + iw / 2, H - 6, xTitle, "axl", "middle");
+}
+
+/* ---------- forest plot (Fig 3a) ---------- */
+function forest(host, rows, truth) {
+  const W = 460, rowH = 30, m = { l: 132, r: 16, t: 10, b: 38 };
+  const H = m.t + rows.length * rowH + m.b;
+  const s = svgRoot(host, W, H, "Estimated value per episode with 95% intervals");
+  const lo = -50, hi = 20, iw = W - m.l - m.r;
+  const x = v => m.l + ((v - lo) / (hi - lo)) * iw;
+  ticks(lo, hi, 10).forEach(v => {
+    el("line", { x1: x(v), x2: x(v), y1: m.t, y2: H - m.b, class: "grid" }, s);
+    txt(s, x(v), H - m.b + 16, minus(v), "tick", "middle");
+  });
+  el("line", { x1: x(0), x2: x(0), y1: m.t, y2: H - m.b, class: "ax" }, s);
+  el("line", { x1: x(truth), x2: x(truth), y1: m.t, y2: H - m.b, class: "s-logged", "stroke-width": 1.5, "stroke-dasharray": "4 3" }, s);
+  txt(s, m.l + iw / 2, H - 6, "Value per episode (DM)", "axl", "middle");
+  rows.forEach((r, i) => {
+    const cy = m.t + i * rowH + rowH / 2;
+    const cls = r.ours ? "ours" : r.logged ? "logged" : "base";
+    txt(s, m.l - 10, cy + 4, r.name, r.ours ? "lbl" : "tick", "end", r.ours ? { "font-weight": 600 } : {});
+    if (r.ci) {
+      el("line", { x1: x(r.ci[0]), x2: x(r.ci[1]), y1: cy, y2: cy, class: "s-" + cls, "stroke-width": 2 }, s);
+      [r.ci[0], r.ci[1]].forEach(v => el("line", { x1: x(v), x2: x(v), y1: cy - 5, y2: cy + 5, class: "s-" + cls, "stroke-width": 2 }, s));
+    }
+    el("circle", { cx: x(r.dm), cy, r: 3.5, class: "f-" + cls }, s);
+    const hit = el("rect", { x: 0, y: cy - rowH / 2, width: W, height: rowH, class: "hit" }, s);
+    hover(hit, `<b>${r.name}</b><br>DM ${fmt(r.dm)}` + (r.ci ? `<br>95% CI [${fmt(r.ci[0])}, ${fmt(r.ci[1])}]` : "<br>no interval computed"));
+  });
+}
+
+/* ---------- DM vs DR scatter (Fig 3b) ---------- */
+function agree(host, rows) {
+  const W = 400, H = 330, m = { l: 48, r: 14, t: 12, b: 42 };
+  const s = svgRoot(host, W, H, "DM versus DR estimate per policy");
+  const lo = -50, hi = 20, iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const x = v => m.l + ((v - lo) / (hi - lo)) * iw;
+  const y = v => m.t + ih - ((v - lo) / (hi - lo)) * ih;
+  ticks(lo, hi, 10).forEach(v => {
+    el("line", { x1: x(v), x2: x(v), y1: m.t, y2: m.t + ih, class: "grid" }, s);
+    el("line", { x1: m.l, x2: m.l + iw, y1: y(v), y2: y(v), class: "grid" }, s);
+    txt(s, x(v), m.t + ih + 16, minus(v), "tick", "middle");
+    txt(s, m.l - 8, y(v) + 4, minus(v), "tick", "end");
+  });
+  el("line", { x1: x(lo), y1: y(lo), x2: x(hi), y2: y(hi), class: "ax", "stroke-dasharray": "3 3" }, s);
+  txt(s, m.l + iw / 2, H - 6, "DM value per episode", "axl", "middle");
+  txt(s, 12, m.t + ih / 2, "DR value per episode", "axl", "middle", { transform: `rotate(-90 12 ${m.t + ih / 2})` });
+  rows.forEach(r => {
+    const cls = r.ours ? "f-ours" : "f-base";
+    el("circle", { cx: x(r.dm), cy: y(r.dr), r: r.ours ? 6 : 4.5, class: cls, stroke: "var(--paper)", "stroke-width": 2 }, s);
+    if (r.lab) txt(s, x(r.dm) + (r.labDx ?? 9), y(r.dr) + (r.labDy ?? 4), r.lab, r.ours ? "lbl" : "lbl-2", r.labAnchor || "start");
+    const hit = el("circle", { cx: x(r.dm), cy: y(r.dr), r: 12, class: "hit" }, s);
+    hover(hit, `<b>${r.name}</b><br>DM ${fmt(r.dm)} · DR ${fmt(r.dr)}<br>gap ${Math.abs(r.dm - r.dr).toFixed(2)}`);
+  });
+}
+
+/* ---------- line with markers (Fig 4) ---------- */
+function line(host, pts, { yMin, yMax, step, yFmt, shipped, label, yTitle }) {
+  const W = 420, H = 250, m = { l: 48, r: 16, t: 22, b: 42 };
+  const s = svgRoot(host, W, H, label);
+  const xs = pts.map(p => p.x), xMin = 0, xMax = 16;
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const x = v => m.l + ((v - xMin) / (xMax - xMin)) * iw;
+  const y = v => m.t + ih - ((v - yMin) / (yMax - yMin)) * ih;
+  ticks(yMin, yMax, step).forEach(v => {
+    el("line", { x1: m.l, x2: m.l + iw, y1: y(v), y2: y(v), class: "grid" }, s);
+    txt(s, m.l - 8, y(v) + 4, yFmt(v), "tick", "end");
+  });
+  xs.forEach(v => txt(s, x(v), m.t + ih + 16, v, "tick", "middle"));
+  el("line", { x1: m.l, x2: m.l + iw, y1: m.t + ih, y2: m.t + ih, class: "ax" }, s);
+  el("line", { x1: x(shipped), x2: x(shipped), y1: m.t, y2: m.t + ih, class: "s-ours", "stroke-width": 1, "stroke-dasharray": "3 3" }, s);
+  txt(s, x(shipped) + 5, m.t + ih - 6, "shipped", "lbl-2");
+  txt(s, m.l + iw / 2, H - 6, "Tree max depth", "axl", "middle");
+  el("path", { d: pts.map((p, i) => (i ? "L" : "M") + x(p.x) + "," + y(p.y)).join(" "), class: "s-ours", fill: "none", "stroke-width": 2 }, s);
+  pts.forEach(p => {
+    el("circle", { cx: x(p.x), cy: y(p.y), r: p.x === shipped ? 5.5 : 4, class: "f-ours", stroke: "var(--paper)", "stroke-width": 2 }, s);
+    if (p === pts[0]) txt(s, x(p.x) + 9, y(p.y) + 4, yFmt(p.y), "lbl", "start");
+    else if (p.x === shipped || p === pts[pts.length - 1]) txt(s, x(p.x), y(p.y) - 10, yFmt(p.y), "lbl", "middle");
+    const hit = el("circle", { cx: x(p.x), cy: y(p.y), r: 14, class: "hit" }, s);
+    hover(hit, `<b>Depth ${p.x}</b>${p.tip}`);
+  });
+}
+
+/* ---------- paired horizontal bars (Fig 5) ---------- */
+function pairedH(host, rows) {
+  const W = 900, rowH = 38, m = { l: 150, r: 60, t: 6, b: 34 };
+  const H = m.t + rows.length * rowH + m.b;
+  const s = svgRoot(host, W, H, "Action distribution, logged versus shipped");
+  s.style.minWidth = "620px";
+  const xMax = 35, iw = W - m.l - m.r;
+  const x = v => m.l + (v / xMax) * iw;
+  ticks(0, xMax, 5).forEach(v => {
+    el("line", { x1: x(v), x2: x(v), y1: m.t, y2: H - m.b, class: "grid" }, s);
+    txt(s, x(v), H - m.b + 16, v + "%", "tick", "middle");
+  });
+  txt(s, m.l + iw / 2, H - 4, "Share of held-out decisions", "axl", "middle");
+  const bh = 12;
+  rows.forEach((r, i) => {
+    const top = m.t + i * rowH + 6;
+    txt(s, m.l - 10, top + bh + 5, r.k, "lbl", "end");
+    el("path", { d: roundedRightBar(m.l, top, x(r.old) - m.l, bh), class: "f-logged" }, s);
+    el("path", { d: roundedRightBar(m.l, top + bh + 2, x(r.nw) - m.l, bh), class: "f-ours" }, s);
+    txt(s, x(r.old) + 6, top + bh - 2, r.old.toFixed(1) + "%", "lbl-2");
+    txt(s, x(r.nw) + 6, top + 2 * bh, r.nw.toFixed(1) + "%", "lbl-2");
+    const hit = el("rect", { x: 0, y: top - 4, width: W, height: rowH, class: "hit" }, s);
+    const d = r.nw - r.old;
+    hover(hit, `<b>${r.k}</b><br>Logged ${r.old.toFixed(1)}% · Shipped ${r.nw.toFixed(1)}%<br>Change ${fmt(d, 1)} pts`);
+  });
+  el("line", { x1: m.l, x2: m.l, y1: m.t, y2: H - m.b, class: "ax" }, s);
+}
+
+/* ---------- tables ---------- */
+function rowsInto(id, html) { document.getElementById(id).innerHTML = html; }
+function cellVal(v, best, d = 2) {
+  const t = fmt(v, d);
+  return best ? `<span class="best">${t}</span>` : t;
+}
+
+function render(D) {
+  /* Table 1 */
+  rowsInto("tab1-body", D.outcomes.map(o =>
+    `<tr><td>${o.k}</td><td class="num">${o.n.toLocaleString()}</td><td class="num">${o.share.toFixed(1)}%</td><td class="num ${o.r > 0 ? "pos" : "neg"}">${fmt(o.r, 1)}</td></tr>`).join(""));
+
+  /* Figure 2 */
+  vbars("fig2a", D.fatigue, { yMax: 15, step: 5, xTitle: "Messages already sent in this thread", highlight: r => r.v > 10, label: "Opt-out rate by prior messages" });
+  vbars("fig2b", D.perAction, { yMax: 15, step: 5, xTitle: "Action sent", highlight: r => r.v > 9, label: "Opt-out rate by action" });
+
+  /* Table 2 */
+  rowsInto("tab2-body", D.unhappy.map(u =>
+    `<tr${u.k === "ESCALATE_TO_HUMAN" ? ' class="ours"' : ""}><td><code>${u.k}</code></td><td class="num">${u.n.toLocaleString()}</td><td class="num ${u.r > 1 ? "pos" : u.r < -1 ? "neg" : ""}">${fmt(u.r, 1)}</td></tr>`).join(""));
+
+  /* Table 4 */
+  const P = D.policies;
+  const bestDM = Math.max(...P.filter(p => !p.logged).map(p => p.dm));
+  const bestDR = Math.max(...P.filter(p => p.dr != null).map(p => p.dr));
+  const bestSN = Math.max(...P.map(p => p.snips));
+  rowsInto("tab4-body", P.map((p, i) => {
+    const cls = p.ours ? "ours" : (p.logged || (i > 0 && P[i - 1].ours) ? "mid" : "");
+    return `<tr class="${cls}">
+      <td>${p.ours ? "<b>" + p.name + "</b>" : p.name}${p.note ? `<span class="sub">${p.note}</span>` : ""}</td>
+      <td class="num">${cellVal(p.dm, !p.logged && p.dm === bestDM)}${p.ci ? `<span class="ci">[${fmt(p.ci[0], 1)}, ${fmt(p.ci[1], 1)}]</span>` : ""}</td>
+      <td class="num ${p.dr == null ? "muted" : ""}">${p.dr == null ? "—" : cellVal(p.dr, p.dr === bestDR)}</td>
+      <td class="num">${cellVal(p.snips, p.snips === bestSN)}</td>
+      <td class="num">${p.ess.toLocaleString()}</td>
+      <td class="num">${p.send.toFixed(1)}%</td></tr>`;
+  }).join(""));
+
+  /* Figure 3 */
+  const truth = P.find(p => p.logged).dm;
+  forest("fig3a", P.filter(p => !p.logged).map(p => ({ name: p.short || p.name, dm: p.dm, ci: p.ci, ours: p.ours })), truth);
+  const est = P.filter(p => p.dr != null);
+  agree("fig3b", est.map(p => ({ name: p.short || p.name, dm: p.dm, dr: p.dr, ours: p.ours, lab: p.lab, labDx: p.labDx, labDy: p.labDy, labAnchor: p.labAnchor })));
+  document.getElementById("maxgap").textContent = Math.max(...est.map(p => Math.abs(p.dm - p.dr))).toFixed(2) + " per episode";
+
+  /* Table 5 */
+  const full = D.ablation[0];
+  rowsInto("tab5-body", D.ablation.map((a, i) => {
+    const d = a.dm - full.dm;
+    return `<tr class="${i === 0 ? "ours" : a.sep ? "mid" : ""}">
+      <td>${i === 0 ? "<b>" + a.name + "</b>" : a.name}</td>
+      <td class="num">${fmt(a.dm)}</td>
+      <td class="num ${i === 0 ? "muted" : d > 0.05 ? "pos" : d < -0.05 ? "neg" : ""}">${i === 0 ? "—" : fmt(d)}</td>
+      <td class="num">${fmt(a.dr)}</td><td class="num">${fmt(a.snips)}</td><td class="num">${a.send.toFixed(1)}%</td></tr>`;
+  }).join(""));
+  document.getElementById("tab5-note").textContent = D.ablationNote;
+  document.getElementById("abl-text").innerHTML = D.ablationText;
+
+  /* Figure 4 */
+  line("fig4a", D.depth.map(p => ({ x: p.d, y: p.fid, tip: `<br>Fidelity ${p.fid.toFixed(1)}%<br>Weighted F1 ${p.f1.toFixed(1)}%<br>${p.leaves} leaves` })),
+    { yMin: 20, yMax: 100, step: 20, yFmt: v => Math.round(v) + "%", shipped: 10, label: "Distillation fidelity by depth" });
+  const dms = D.depth.map(p => p.dm);
+  const lo = Math.floor(Math.min(...dms) / 5) * 5, hi = Math.ceil(Math.max(...dms) / 5) * 5;
+  line("fig4b", D.depth.map(p => ({ x: p.d, y: p.dm, tip: `<br>DM ${fmt(p.dm)} · DR ${fmt(p.dr)}` })),
+    { yMin: Math.min(lo, 0), yMax: hi, step: 5, yFmt: v => minus(v > 0 ? "+" + v : v), shipped: 10, label: "Policy value by depth" });
+  document.getElementById("fig4-extra").innerHTML = D.depthNote;
+
+  /* Table 6 */
+  rowsInto("tab6-body", D.slices.map(r => {
+    const vals = [r.ours, r.rule, r.wait, r.simple], b = Math.max(...vals);
+    return `<tr class="${r.overall ? "mid" : ""}"><td>${r.overall ? "<b>" + r.k + "</b>" : r.k}</td><td class="num">${r.steps.toLocaleString()}</td><td class="num">${r.eps.toLocaleString()}</td>` +
+      vals.map(v => `<td class="num">${cellVal(v, v === b)}</td>`).join("") + "</tr>";
+  }).join(""));
+
+  /* Figure 5 */
+  pairedH("fig5a", D.mix);
+
+  /* Table 7 */
+  rowsInto("tab7-body", D.support.map(r =>
+    `<tr${r.thin ? ' class="flag"' : ""}><td><code>${r.k}</code></td><td class="num">${r.n.toLocaleString()}</td><td class="num">${r.old.toFixed(1)}%</td><td class="num">${r.nw.toFixed(1)}%</td></tr>`).join(""));
+}
+render(DATA);
+</script>

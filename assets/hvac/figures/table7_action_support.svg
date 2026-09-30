@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="407.52pt" height="226.08pt" viewBox="0 0 407.52 226.08" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-29T21:42:25.743262</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 226.08 
+L 407.52 226.08 
+L 407.52 -0 
+L 0 -0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 5.76 172.08 
+L 401.76 172.08 
+L 401.76 191.52 
+L 5.76 191.52 
+z
+" clip-path="url(#pe1a0743267)" style="fill: #e3eefb"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 5.76 191.52 
+L 401.76 191.52 
+L 401.76 210.96 
+L 5.76 210.96 
+z
+" clip-path="url(#pe1a0743267)" style="fill: #e3eefb"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 5.76 36 
+L 401.76 36 
+" clip-path="url(#pe1a0743267)" style="fill: none; stroke: #16191e; stroke-width: 1.3; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 5.76 55.44 
+L 401.76 55.44 
+" clip-path="url(#pe1a0743267)" style="fill: none; stroke: #16191e; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 5.76 210.96 
+L 401.76 210.96 
+" clip-path="url(#pe1a0743267)" style="fill: none; stroke: #16191e; stroke-width: 1.3; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #16191e" x="5.76" y="25.011" transform="rotate(-0 5.76 25.011)">Table 7. Data support per action vs how often the shipped policy uses it</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 8.3px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #16191e" x="10.08" y="48.8657" transform="rotate(-0 10.08 48.8657)">Action</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 8.3px; font-family: 'Helvetica Neue'; text-anchor: end; fill: #16191e" x="239.04" y="48.8657" transform="rotate(-0 239.04 48.8657)">Logged rows</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 8.3px; font-family: 'Helvetica Neue'; text-anchor: end; fill: #16191e" x="318.24" y="48.8657" transform="rotate(-0 318.24 48.8657)">Logged share</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 8.3px; font-family: 'Helvetica Neue'; text-anchor: end; fill: #16191e" x="397.44" y="48.8657" transform="rotate(-0 397.44 48.8657)">Shipped share</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 8.2px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #16191e" x="10.08" y="68.1899" transform="rotate(-0 10.08 68.1899)">ESTIMATE_NUDGE</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="239.04" y="67.290078" transform="rotate(-0 239.04 67.290078)">4,945</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="318.24" y="67.290078" transform="rotate(-0 318.24 67.290078)">31.8%</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="397.44" y="67.290078" transform="rotate(-0 397.44 67.290078)">2.3%</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 8.2px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #16191e" x="10.08" y="87.6299" transform="rotate(-0 10.08 87.6299)">ASK_OBJECTION</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="239.04" y="86.730078" transform="rotate(-0 239.04 86.730078)">3,201</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="318.24" y="86.730078" transform="rotate(-0 318.24 86.730078)">20.6%</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="397.44" y="86.730078" transform="rotate(-0 397.44 86.730078)">9.3%</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 8.2px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #16191e" x="10.08" y="107.0699" transform="rotate(-0 10.08 107.0699)">CHECK_IN</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="239.04" y="106.170078" transform="rotate(-0 239.04 106.170078)">2,846</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="318.24" y="106.170078" transform="rotate(-0 318.24 106.170078)">18.3%</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="397.44" y="106.170078" transform="rotate(-0 397.44 106.170078)">3.7%</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 8.2px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #16191e" x="10.08" y="126.5099" transform="rotate(-0 10.08 126.5099)">OFFER_SCHEDULING</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="239.04" y="125.610078" transform="rotate(-0 239.04 125.610078)">2,097</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="318.24" y="125.610078" transform="rotate(-0 318.24 125.610078)">13.5%</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="397.44" y="125.610078" transform="rotate(-0 397.44 125.610078)">17.4%</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 8.2px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #16191e" x="10.08" y="145.9499" transform="rotate(-0 10.08 145.9499)">WAIT</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="239.04" y="145.050078" transform="rotate(-0 239.04 145.050078)">1,048</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="318.24" y="145.050078" transform="rotate(-0 318.24 145.050078)">6.7%</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="397.44" y="145.050078" transform="rotate(-0 397.44 145.050078)">22.5%</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 8.2px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #16191e" x="10.08" y="165.3899" transform="rotate(-0 10.08 165.3899)">MEMBERSHIP_TOUCH</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="239.04" y="164.490078" transform="rotate(-0 239.04 164.490078)">781</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="318.24" y="164.490078" transform="rotate(-0 318.24 164.490078)">5.0%</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="397.44" y="164.490078" transform="rotate(-0 397.44 164.490078)">14.1%</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 8.2px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #16191e" x="10.08" y="184.8299" transform="rotate(-0 10.08 184.8299)">ESCALATE_TO_HUMAN</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="239.04" y="183.930078" transform="rotate(-0 239.04 183.930078)">350</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="318.24" y="183.930078" transform="rotate(-0 318.24 183.930078)">2.2%</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="397.44" y="183.930078" transform="rotate(-0 397.44 183.930078)">4.9%</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 8.2px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #16191e" x="10.08" y="204.2699" transform="rotate(-0 10.08 204.2699)">PARK_THREAD</text>
+   </g>
+   <g id="text_35">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="239.04" y="203.370078" transform="rotate(-0 239.04 203.370078)">297</text>
+   </g>
+   <g id="text_36">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="318.24" y="203.370078" transform="rotate(-0 318.24 203.370078)">1.9%</text>
+   </g>
+   <g id="text_37">
+    <text style="font-size: 8.2px; font-family: 'Menlo'; text-anchor: end; fill: #16191e" x="397.44" y="203.370078" transform="rotate(-0 397.44 203.370078)">25.7%</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe1a0743267">
+   <rect x="5.76" y="5.76" width="396" height="214.56"/>
+  </clipPath>
+ </defs>
+</svg>

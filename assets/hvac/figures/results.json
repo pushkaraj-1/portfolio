@@ -1,0 +1,548 @@
+{
+ "outcomes": [
+  {
+   "k": "Continue (no reply yet)",
+   "n": 61298,
+   "share": 67.9,
+   "r": -2.62
+  },
+  {
+   "k": "Episode hit 4 steps",
+   "n": 12181,
+   "share": 13.5,
+   "r": -3.33
+  },
+  {
+   "k": "Opted out",
+   "n": 7136,
+   "share": 7.9,
+   "r": -62.55
+  },
+  {
+   "k": "Booked appointment",
+   "n": 2343,
+   "share": 2.6,
+   "r": 33.43
+  },
+  {
+   "k": "Escalated to human",
+   "n": 2178,
+   "share": 2.4,
+   "r": -15.58
+  },
+  {
+   "k": "Sold estimate",
+   "n": 1648,
+   "share": 1.8,
+   "r": 116.78
+  },
+  {
+   "k": "Parked",
+   "n": 1574,
+   "share": 1.7,
+   "r": -5.51
+  },
+  {
+   "k": "Positive review",
+   "n": 1300,
+   "share": 1.4,
+   "r": 9.75
+  },
+  {
+   "k": "Membership converted",
+   "n": 640,
+   "share": 0.7,
+   "r": 18.07
+  }
+ ],
+ "fatigue": [
+  {
+   "k": "0",
+   "name": "First message",
+   "v": 5.1,
+   "n": 28998
+  },
+  {
+   "k": "1",
+   "name": "Second message",
+   "v": 6.4,
+   "n": 24320
+  },
+  {
+   "k": "2",
+   "name": "Third message",
+   "v": 13.2,
+   "n": 19480
+  },
+  {
+   "k": "3",
+   "name": "Fourth message",
+   "v": 13.6,
+   "n": 11262
+  }
+ ],
+ "perAction": [
+  {
+   "k": "CHECK\nIN",
+   "name": "CHECK_IN",
+   "v": 6.4,
+   "n": 16255
+  },
+  {
+   "k": "MEMBER-\nSHIP",
+   "name": "MEMBERSHIP_TOUCH",
+   "v": 6.9,
+   "n": 4335
+  },
+  {
+   "k": "ASK\nOBJECTION",
+   "name": "ASK_OBJECTION",
+   "v": 9.5,
+   "n": 18957
+  },
+  {
+   "k": "ESTIMATE\nNUDGE",
+   "name": "ESTIMATE_NUDGE",
+   "v": 9.7,
+   "n": 28378
+  },
+  {
+   "k": "OFFER\nSCHED.",
+   "name": "OFFER_SCHEDULING",
+   "v": 10.0,
+   "n": 12383
+  }
+ ],
+ "unhappy": [
+  {
+   "k": "ESCALATE_TO_HUMAN",
+   "n": 164,
+   "r": 21.0
+  },
+  {
+   "k": "WAIT",
+   "n": 257,
+   "r": -0.1
+  },
+  {
+   "k": "MEMBERSHIP_TOUCH",
+   "n": 193,
+   "r": -7.3
+  },
+  {
+   "k": "PARK_THREAD",
+   "n": 50,
+   "r": -7.8
+  },
+  {
+   "k": "CHECK_IN",
+   "n": 911,
+   "r": -11.5
+  },
+  {
+   "k": "ASK_OBJECTION",
+   "n": 382,
+   "r": -17.4
+  },
+  {
+   "k": "ESTIMATE_NUDGE",
+   "n": 676,
+   "r": -18.8
+  },
+  {
+   "k": "OFFER_SCHEDULING",
+   "n": 357,
+   "r": -23.5
+  }
+ ],
+ "policies": [
+  {
+   "dm": 15.25,
+   "dr": 16.79,
+   "snips": 11.32,
+   "ess": 1448,
+   "send": 46.9,
+   "ci": [
+    14.56,
+    16.01
+   ],
+   "name": "Shipped: distilled FQI + guardrails",
+   "short": "Shipped (ours)",
+   "ours": true,
+   "lab": "ours"
+  },
+  {
+   "dm": 4.35,
+   "dr": 5.55,
+   "snips": 3.68,
+   "ess": 1253,
+   "send": 25.3,
+   "ci": [
+    4.03,
+    4.66
+   ],
+   "name": "Hand-written rule policy",
+   "short": "Rule policy",
+   "lab": "rules"
+  },
+  {
+   "dm": 1.1,
+   "dr": 0.9,
+   "snips": -0.18,
+   "ess": 1031,
+   "send": 0.0,
+   "ci": [
+    0.93,
+    1.23
+   ],
+   "name": "always_wait",
+   "lab": "wait"
+  },
+  {
+   "dm": -3.71,
+   "dr": -3.79,
+   "snips": 1.07,
+   "ess": 2547,
+   "send": 78.6,
+   "ci": [
+    -4.18,
+    -3.33
+   ],
+   "name": "simple_rule",
+   "note": "starter",
+   "lab": "simple_rule",
+   "labDy": 14
+  },
+  {
+   "dm": -8.79,
+   "dr": -8.86,
+   "snips": -5.7,
+   "ess": 297,
+   "send": 0.0,
+   "ci": null,
+   "name": "always_park",
+   "lab": "park"
+  },
+  {
+   "dm": -19.13,
+   "dr": -19.08,
+   "snips": -16.17,
+   "ess": 345,
+   "send": 0.0,
+   "ci": null,
+   "name": "always_escalate",
+   "lab": "escalate",
+   "labDy": -6
+  },
+  {
+   "dm": -19.58,
+   "dr": -19.45,
+   "snips": -4.57,
+   "ess": 1946,
+   "send": 100.0,
+   "ci": null,
+   "name": "always_check_in",
+   "lab": "check_in",
+   "labDy": 14
+  },
+  {
+   "dm": -46.39,
+   "dr": -46.53,
+   "snips": -10.5,
+   "ess": 3386,
+   "send": 100.0,
+   "ci": null,
+   "name": "always_estimate_nudge",
+   "short": "always_nudge",
+   "lab": "estimate_nudge"
+  },
+  {
+   "name": "Logged policy",
+   "short": "Logged",
+   "logged": true,
+   "dm": -13.46,
+   "dr": null,
+   "snips": -4.33,
+   "ess": 15565,
+   "send": 89.2,
+   "note": "ground truth"
+  }
+ ],
+ "ablation": [
+  {
+   "name": "Shipped: guardrails + tree (d=10)",
+   "dm": 15.25,
+   "dr": 16.79,
+   "snips": 11.32,
+   "send": 46.9
+  },
+  {
+   "name": "\u2212 guardrails (tree alone)",
+   "dm": 15.24,
+   "dr": 16.53,
+   "snips": 11.07,
+   "send": 49.2
+  },
+  {
+   "name": "\u2212 escalation rule",
+   "dm": 15.6,
+   "dr": 16.82,
+   "snips": 11.32,
+   "send": 47.0
+  },
+  {
+   "name": "\u2212 membership rule",
+   "dm": 15.14,
+   "dr": 16.6,
+   "snips": 11.25,
+   "send": 48.7
+  },
+  {
+   "name": "\u2212 learned model (rules, else WAIT)",
+   "dm": 1.07,
+   "dr": 1.55,
+   "snips": 0.71,
+   "send": 3.1
+  },
+  {
+   "name": "FQI teacher, no guardrails",
+   "sep": true,
+   "dm": 21.06,
+   "dr": 22.31,
+   "snips": 13.34,
+   "send": 56.5
+  },
+  {
+   "name": "FQI teacher + guardrails (not distilled)",
+   "dm": 16.14,
+   "dr": 17.85,
+   "snips": 12.08,
+   "send": 42.3
+  }
+ ],
+ "depth": [
+  {
+   "d": 2,
+   "fid": 27.8,
+   "f1": 22.5,
+   "leaves": 3,
+   "dm": -7.26,
+   "dr": -6.76
+  },
+  {
+   "d": 4,
+   "fid": 64.6,
+   "f1": 67.0,
+   "leaves": 9,
+   "dm": 11.85,
+   "dr": 12.94
+  },
+  {
+   "d": 6,
+   "fid": 75.9,
+   "f1": 76.0,
+   "leaves": 27,
+   "dm": 13.87,
+   "dr": 15.62
+  },
+  {
+   "d": 8,
+   "fid": 81.5,
+   "f1": 82.6,
+   "leaves": 67,
+   "dm": 14.96,
+   "dr": 16.72
+  },
+  {
+   "d": 10,
+   "fid": 85.5,
+   "f1": 86.7,
+   "leaves": 148,
+   "dm": 15.25,
+   "dr": 16.79
+  },
+  {
+   "d": 14,
+   "fid": 87.9,
+   "f1": 88.6,
+   "leaves": 376,
+   "dm": 15.27,
+   "dr": 16.91
+  }
+ ],
+ "mix": [
+  {
+   "k": "ESTIMATE_NUDGE",
+   "old": 31.8,
+   "nw": 2.3
+  },
+  {
+   "k": "ASK_OBJECTION",
+   "old": 20.6,
+   "nw": 9.3
+  },
+  {
+   "k": "CHECK_IN",
+   "old": 18.3,
+   "nw": 3.7
+  },
+  {
+   "k": "OFFER_SCHEDULING",
+   "old": 13.5,
+   "nw": 17.4
+  },
+  {
+   "k": "WAIT",
+   "old": 6.7,
+   "nw": 22.5
+  },
+  {
+   "k": "MEMBERSHIP_TOUCH",
+   "old": 5.0,
+   "nw": 14.1
+  },
+  {
+   "k": "ESCALATE_TO_HUMAN",
+   "old": 2.2,
+   "nw": 4.9
+  },
+  {
+   "k": "PARK_THREAD",
+   "old": 1.9,
+   "nw": 25.7
+  }
+ ],
+ "support": [
+  {
+   "k": "ESTIMATE_NUDGE",
+   "n": 4945,
+   "old": 31.8,
+   "nw": 2.3,
+   "thin": false
+  },
+  {
+   "k": "ASK_OBJECTION",
+   "n": 3201,
+   "old": 20.6,
+   "nw": 9.3,
+   "thin": false
+  },
+  {
+   "k": "CHECK_IN",
+   "n": 2846,
+   "old": 18.3,
+   "nw": 3.7,
+   "thin": false
+  },
+  {
+   "k": "OFFER_SCHEDULING",
+   "n": 2097,
+   "old": 13.5,
+   "nw": 17.4,
+   "thin": false
+  },
+  {
+   "k": "WAIT",
+   "n": 1048,
+   "old": 6.7,
+   "nw": 22.5,
+   "thin": false
+  },
+  {
+   "k": "MEMBERSHIP_TOUCH",
+   "n": 781,
+   "old": 5.0,
+   "nw": 14.1,
+   "thin": false
+  },
+  {
+   "k": "ESCALATE_TO_HUMAN",
+   "n": 350,
+   "old": 2.2,
+   "nw": 4.9,
+   "thin": true
+  },
+  {
+   "k": "PARK_THREAD",
+   "n": 297,
+   "old": 1.9,
+   "nw": 25.7,
+   "thin": true
+  }
+ ],
+ "slices": [
+  {
+   "k": "Open estimates",
+   "steps": 5377,
+   "eps": 1671,
+   "ours": 35.93,
+   "rule": 8.48,
+   "wait": 4.57,
+   "simple": 2.88,
+   "overall": false
+  },
+  {
+   "k": "Turn 0 only",
+   "steps": 5000,
+   "eps": 5000,
+   "ours": 14.59,
+   "rule": 1.66,
+   "wait": -2.04,
+   "simple": 5.02,
+   "overall": false
+  },
+  {
+   "k": "Weather extreme",
+   "steps": 1860,
+   "eps": 606,
+   "ours": 5.61,
+   "rule": -2.21,
+   "wait": -1.07,
+   "simple": -5.82,
+   "overall": false
+  },
+  {
+   "k": "Positive signal",
+   "steps": 1438,
+   "eps": 1202,
+   "ours": 14.21,
+   "rule": 15.72,
+   "wait": 0.32,
+   "simple": -0.64,
+   "overall": false
+  },
+  {
+   "k": "Unhappy customers",
+   "steps": 535,
+   "eps": 432,
+   "ours": 18.56,
+   "rule": 20.36,
+   "wait": -3.6,
+   "simple": 23.31,
+   "overall": false
+  },
+  {
+   "k": "Membership renewal",
+   "steps": 1920,
+   "eps": 630,
+   "ours": -1.29,
+   "rule": -0.39,
+   "wait": 0.4,
+   "simple": -11.07,
+   "overall": false
+  },
+  {
+   "k": "Overall",
+   "steps": 15565,
+   "eps": 5000,
+   "ours": 15.25,
+   "rule": 4.35,
+   "wait": 1.1,
+   "simple": -3.71,
+   "overall": true
+  }
+ ],
+ "ablationNote": "",
+ "ablationText": "",
+ "depthNote": ""
+}

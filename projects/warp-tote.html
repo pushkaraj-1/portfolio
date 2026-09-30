@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warehouse Tote Perception — Pushkaraj Baradkar</title>
+<meta name="description" content="A four-stage vision pipeline for a robotic pack station: find the tote, segment what is in it, decide what is an item, and place the suction cup — 0.958 pick score at 619 ms on a laptop.">
+<meta name="theme-color" content="#1e3a8a">
+<link rel="stylesheet" href="../styles.css?v=d7e26e79">
+<link rel="icon" href="../assets/img/profile.jpeg">
+<script>
+(function(){try{var t=localStorage.getItem('theme');
+if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-header">
+  <nav class="container nav">
+    <div class="nav-left">
+      <a class="nav-brand" href="../index.html">Pushkaraj Baradkar</a>
+      <div class="nav-cta"><a class="btn btn-solid btn-small" href="https://drive.google.com/file/d/10jmVGDUbspW-O4RcJK-UkkevNug94hOk/view?usp=sharing" target="_blank" rel="noopener">View resume</a><a class="btn btn-outline btn-small" href="../assets/resume/resume.pdf" download>Download resume</a></div>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links" id="primary-navigation"><li><a href="../index.html" class="nav-link">About</a></li><li><a href="../news.html" class="nav-link">News</a></li><li><a href="../experience.html" class="nav-link">Experience</a></li><li><a href="../projects.html" class="nav-link active">Projects</a></li><li><a href="../skills.html" class="nav-link">Skills</a></li><li><a href="../education.html" class="nav-link">Education</a></li><li><a href="../activities.html" class="nav-link">Service</a></li>
+        <li class="nav-search"><div class="search-wrap">
+          <input id="site-search" type="search" placeholder="Search…" autocomplete="off"
+                 aria-label="Search the site" data-base="../">
+          <div id="search-results" class="search-results" hidden></div>
+        </div></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation" title="Menu">&#9776;</button>
+    </div>
+  </nav>
+</header>
+<main class="container inner-page">
+  <section class="section">
+    <div class="container">
+      <a class="back-link" href="../projects.html">&larr; All projects</a>
+      <div class="item-meta">Computer Vision & Perception &middot; Aug 2026</div>
+      <h1 class="page-title">Warehouse Tote Perception</h1>
+      <div class="section-divider"></div>
+      <p class="page-lede">A four-stage vision pipeline for a robotic pack station: find the tote, segment what is in it, decide what is an item, and place the suction cup — 0.958 pick score at 619 ms on a laptop.</p>
+      <div class="tag-row"><span class="tag">FastSAM</span><span class="tag">OpenCV</span><span class="tag">PyTorch</span><span class="tag">Segmentation</span><span class="tag">Robotic Picking</span><span class="tag">Python</span></div>
+      <div class="pub-actions"><a class="btn-chip" href="https://github.com/Pushks18/warp-robotics" target="_blank" rel="noopener">GitHub</a></div>
+      <div class="prose">
+<p>Given a top-down photo of a warehouse tote, the pipeline answers three questions: what is in
+there, where should the suction cup land, and is this a tote the robot should attempt at all.
+Built for the Warp Robotics perception challenge on 120 images from Amazon's
+<strong>ARMBench</strong>. It runs fully locally, with no hosted models.</p>
+
+<p>On the dev split it reaches a <strong>pick score of 0.958</strong> (108 correct picks, 5 wrong,
+7 flagged) against 0.31 for flagging every tote, and a detection F1 of 0.589. Bootstrapping the 120
+images gives a 90% interval of 0.925–0.983 for the pick score.</p>
+
+<figure class="fig fig-wide"><a href="../assets/warp/figures/fig12_stages.jpg" target="_blank" rel="noopener" title="Open full size"><img src="../assets/warp/figures/fig12_stages.jpg" alt="A sparse, a crowded and an empty tote at each of the four stages" loading="lazy"></a><figcaption>One sparse, one crowded and one empty tote at each stage. FastSAM proposes about a hundred regions per image; the vote and set cover keep the items. The empty tote is flagged because nothing survives the vote.</figcaption></figure>
+
+<h2>How it works</h2>
+<ol>
+<li><strong>Find the tote.</strong> The crop is keyed on <em>bright OR saturated</em>, not on tote
+colour, because keying on the vivid yellow and blue bins failed on 16 of 120 images: some totes
+are beige. It keeps <strong>every item pixel on all 120 images</strong> while discarding ~14% of
+each frame.</li>
+<li><strong>Propose regions.</strong> FastSAM-x over the crop. A class-agnostic segmenter is the
+right tool, since the ground truth has no category labels: the task is "where does one thing end
+and the next begin", not "find the bottle". MobileSAM's automatic mode took 20.6 s per image,
+which would have been 41 minutes per pass over the split.</li>
+<li><strong>Decide what is an item.</strong> Masks are kept by a <strong>2-of-3 vote</strong> over
+three cues measured on 604 labelled masks: chromatic distance from the tote colour (0.859 balanced
+accuracy), chromatic spread within the mask (0.870) and edge density (0.840). The vote reaches
+0.908, beating every AND/OR chain tried, and overlaps are resolved by greedy set cover.</li>
+<li><strong>Choose the pick.</strong> The suction point is the peak of the item's distance
+transform, the point furthest from any edge.</li>
+</ol>
+
+<h2>What each stage buys</h2>
+<figure class="fig fig-wide"><a href="../assets/warp/figures/fig01_ablation.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/warp/figures/fig01_ablation.png" alt="Cumulative ablation of detection F1 and pick score" loading="lazy"></a><figcaption>Each row adds one stage to the row above. The mask-level chroma filter alone is worth +0.21 F1 and +0.27 pick score.</figcaption></figure>
+
+<h2>Why not the centre of mass</h2>
+<figure class="fig"><a href="../assets/warp/figures/fig14_pick_point.jpg" target="_blank" rel="noopener" title="Open full size"><img src="../assets/warp/figures/fig14_pick_point.jpg" alt="Distance-transform peak versus centre of mass on a bent item" loading="lazy"></a></figure>
+<p>A suction cup needs the flattest, most continuous surface to seal on, and the grader erodes each
+item by 4 px before testing the pick. Across the 637 masks the pipeline detects, the centre of mass
+lands off its own item <strong>39 times (6.1%)</strong>; the distance-transform peak
+<strong>never does</strong>, by construction.</p>
+
+<h2>Clutter, and an error that changes sign</h2>
+<figure class="fig"><a href="../assets/warp/figures/fig03_clutter.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/warp/figures/fig03_clutter.png" alt="Detection F1 and predicted boxes per item by clutter level" loading="lazy"></a></figure>
+<p>F1 falls from 0.875 on empty totes to 0.354 at 11+ items, but the boxes-per-item ratio crosses
+1.0: sparse totes are cut into too many pieces, crowded ones into too few. One declining curve is
+hiding two different errors. Picking stays at 0.93–1.00 across every clutter level, because a
+pick only has to land on <em>a</em> real item.</p>
+
+<h2>Measured, not claimed</h2>
+<figure class="fig fig-wide"><a href="../assets/warp/figures/fig05_flag_policy.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/warp/figures/fig05_flag_policy.png" alt="Pick confidence of correct and wrong picks, and points lost by every flag threshold" loading="lazy"></a><figcaption>Flagging costs 0.25 on a tote with items, so a confidence gate must be right more than 3 times in 4. Four of the five wrong picks are more confident than the median correct one, and every gate setting loses points.</figcaption></figure>
+<p>So the pipeline flags only when nothing survives detection, which correctly flags 7 of 8 empty
+totes. My confidence score measures pick quality, not the probability of being right; making it
+calibrated is the highest-value next step.</p>
+
+<figure class="fig"><a href="../assets/warp/figures/fig04_robustness.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/warp/figures/fig04_robustness.png" alt="Detection F1 and pick score with the tote recoloured" loading="lazy"></a></figure>
+<p>To test the colour-agnostic claim, I recoloured every tote to colours that appear nowhere in
+the split, leaving the items and the grader untouched. Hue costs nothing: green and magenta land
+within one bootstrap standard error. Grey and white bins cost ~0.11 F1, since they remove the
+strongest cue. That is exactly the loss the 2-of-3 vote was designed to survive.</p>
+
+<h2>Where it fails</h2>
+<figure class="fig fig-wide"><a href="../assets/warp/figures/fig13_failures.jpg" target="_blank" rel="noopener" title="Open full size"><img src="../assets/warp/figures/fig13_failures.jpg" alt="Four failure modes: definition mismatch, occlusion, merged lookalikes, and a non-item at the frame edge" loading="lazy"></a><figcaption>Ground truth above, this pipeline below. Images: ARMBench (Amazon), CC BY 4.0.</figcaption></figure>
+<p>The dominant failure is a <strong>definition mismatch</strong>, not a segmentation error: an
+item is one pickable unit, but a class-agnostic segmenter cannot know that clear plastic is a
+container. Four targeted attempts to raise F1, each aimed at a different stage, moved it by at most
++0.004, and adding more proposals made it worse. The remaining error is in the segmenter's notion
+of an object, so the fixes are fine-tuning on ARMBench's instance labels and depth sensing for
+heavily occluded totes.</p>
+
+<h2>Latency</h2>
+<p><strong>619 ms median</strong> (908 ms p95) per image on an unloaded M4 MacBook Air with no GPU.
+On battery, the more pessimistic condition, steady state is 711 ms median and 1,045 ms p95, still
+under a second. The very first run after a fresh install is about 2.4× slower (1,676 ms median),
+because Metal kernels compile on first use. The two runs produce byte-identical outputs; only the
+clock differs.</p>
+</div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>&copy; <span id="year"></span> Pushkaraj Baradkar</div>
+    <div class="footer-links"><a href="../index.html">About</a><a href="../news.html">News</a><a href="../experience.html">Experience</a><a href="../projects.html">Projects</a><a href="../skills.html">Skills</a><a href="../education.html">Education</a><a href="../activities.html">Service</a></div>
+  </div>
+</footer>
+<script src="../script.js?v=ed22fb51" defer></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HVAC Follow-up Policy Optimization — Pushkaraj Baradkar</title>
+<meta name="description" content="Offline reinforcement learning on 74.7K logged steps — fitted Q-iteration distilled into an auditable depth-10 decision tree, checked by three off-policy estimators that first had to recover the old policy&#x27;s known value.">
+<meta name="theme-color" content="#1e3a8a">
+<link rel="stylesheet" href="../styles.css?v=d7e26e79">
+<link rel="icon" href="../assets/img/profile.jpeg">
+<script>
+(function(){try{var t=localStorage.getItem('theme');
+if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-header">
+  <nav class="container nav">
+    <div class="nav-left">
+      <a class="nav-brand" href="../index.html">Pushkaraj Baradkar</a>
+      <div class="nav-cta"><a class="btn btn-solid btn-small" href="https://drive.google.com/file/d/10jmVGDUbspW-O4RcJK-UkkevNug94hOk/view?usp=sharing" target="_blank" rel="noopener">View resume</a><a class="btn btn-outline btn-small" href="../assets/resume/resume.pdf" download>Download resume</a></div>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links" id="primary-navigation"><li><a href="../index.html" class="nav-link">About</a></li><li><a href="../news.html" class="nav-link">News</a></li><li><a href="../experience.html" class="nav-link">Experience</a></li><li><a href="../projects.html" class="nav-link active">Projects</a></li><li><a href="../skills.html" class="nav-link">Skills</a></li><li><a href="../education.html" class="nav-link">Education</a></li><li><a href="../activities.html" class="nav-link">Service</a></li>
+        <li class="nav-search"><div class="search-wrap">
+          <input id="site-search" type="search" placeholder="Search…" autocomplete="off"
+                 aria-label="Search the site" data-base="../">
+          <div id="search-results" class="search-results" hidden></div>
+        </div></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation" title="Menu">&#9776;</button>
+    </div>
+  </nav>
+</header>
+<main class="container inner-page">
+  <section class="section">
+    <div class="container">
+      <a class="back-link" href="../projects.html">&larr; All projects</a>
+      <div class="item-meta">Machine Learning & Decision Systems &middot; Aug 2026</div>
+      <h1 class="page-title">HVAC Follow-up Policy Optimization</h1>
+      <div class="section-divider"></div>
+      <p class="page-lede">Offline reinforcement learning on 74.7K logged steps — fitted Q-iteration distilled into an auditable depth-10 decision tree, checked by three off-policy estimators that first had to recover the old policy's known value.</p>
+      <div class="tag-row"><span class="tag">Offline RL</span><span class="tag">Fitted Q-Iteration</span><span class="tag">Off-policy Evaluation</span><span class="tag">Policy Distillation</span><span class="tag">scikit-learn</span><span class="tag">Python</span></div>
+      <div class="pub-actions"></div>
+      <div class="prose">
+<p>A follow-up policy for HVAC contractors that decides <strong>when and how</strong> to contact a
+homeowner after a service visit: check in, nudge an open estimate, ask what the objection is,
+offer scheduling, touch membership, park the thread, or escalate to a human.</p>
+
+<p>The hard constraint is that you cannot experiment on real customers. All you have are logs from
+an older policy, which only recorded outcomes for the actions <em>it</em> chose. Every claim about
+an unexplored action is model-based extrapolation, so the work is as much about <strong>honest
+evaluation</strong> as about the policy itself.</p>
+
+<figure class="fig fig-wide"><a href="../assets/hvac/figures/fig1_system_overview.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/hvac/figures/fig1_system_overview.png" alt="Pipeline: logged transitions, feature encoder, fitted Q-iteration, guardrail relabel, distillation to a decision tree, then off-policy evaluation on held-out logs" loading="lazy"></a><figcaption>(A) Learn from 74,733 logged steps. (B) Score each candidate on 5,000 held-out episodes with three estimators, after a sanity gate.</figcaption></figure>
+
+<h2>Why the default is silence</h2>
+<figure class="fig fig-wide"><a href="../assets/hvac/figures/fig2_message_fatigue.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/hvac/figures/fig2_message_fatigue.png" alt="Opt-out rate by messages already sent and by action" loading="lazy"></a><figcaption>Opt-out rate in the logs roughly doubles at the third message, and sales actions carry about 1.5× the risk of service check-ins.</figcaption></figure>
+<p>Opt-outs are 7.9% of logged steps at <strong>−62.6</strong> each, more than half the value of a
+sale (+116.8). So an average message starts at about <strong>−5.6 expected value</strong> before any
+upside. That reframes the problem: the policy's job is to prove that speaking beats staying quiet.
+It is why <code>always_wait</code>, doing literally nothing, scores +1.10 and beats the old policy's
+−13.46.</p>
+
+<h2>Approach</h2>
+<ol>
+<li><strong>Fitted Q-Iteration</strong> (5 rounds, boosted trees) over <strong>74,733 logged
+training steps</strong> from 24,000 episodes, using 31 features visible at decision time only.
+Everything is evaluated on 15,565 held-out steps the model never saw.</li>
+<li><strong>Guardrail relabelling.</strong> Hard product rules override the model's greedy action
+on 31.3% of labels: escalate whenever the customer is unhappy or
+<code>service_risk_score &gt; 0.7</code>. In the logs, escalation is the only action that pays when a
+customer is unhappy (+21.0; every outbound message loses money).</li>
+<li><strong>Distillation</strong> into a <strong>depth-10 decision tree</strong> (148 leaves, 85.5%
+agreement with the full model), exported as one dependency-free Python file that a domain expert
+can read.</li>
+</ol>
+
+<h2>Results</h2>
+<figure class="fig fig-wide"><a href="../assets/hvac/figures/fig3_main_results.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/hvac/figures/fig3_main_results.png" alt="Held-out value per policy with bootstrap intervals, and agreement between the direct-method and doubly robust estimators" loading="lazy"></a><figcaption>Before scoring anything new, the evaluator had to recover the logged policy's known value: truth −13.46, estimate −13.21 (1.9% error).</figcaption></figure>
+<p>Seven baselines were compared on <strong>5,000 held-out episodes</strong>. The shipped policy
+scores <strong>+15.25</strong> per episode (95% CI +14.6 to +16.0) against <strong>−13.46</strong>
+for the old policy, a gain of +28.7 per thread. Doubly robust gives +16.79 and SNIPS +11.32. All
+three estimators rank the learned policy first; the direct method and doubly robust agree on the
+full ranking to within 1.54 per episode. SNIPS differs only on the order of
+<code>always_wait</code> and <code>simple_rule</code>.</p>
+
+<h2>What each component costs and buys</h2>
+<figure class="fig fig-wide"><a href="../assets/hvac/figures/fig4_ablation.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/hvac/figures/fig4_ablation.png" alt="Cost of guardrails and distillation, and the effect of removing one component at a time" loading="lazy"></a></figure>
+<p>The unconstrained FQI teacher scores +21.06. Guardrails cost 4.9 and distillation 0.9: that is
+the price of a policy that is auditable and rule-safe. Removing the learned model drops value by
+14.2, while removing the runtime guardrails barely moves it, because the tree has already learned
+them.</p>
+
+<figure class="fig fig-wide"><a href="../assets/hvac/figures/fig5_depth_sweep.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/hvac/figures/fig5_depth_sweep.png" alt="Tree fidelity and held-out value by maximum depth" loading="lazy"></a><figcaption>Value flattens after depth 10: depth 14 more than doubles the leaves (376 vs 148) for +0.02.</figcaption></figure>
+
+<h2>Where it wins, and where it does not</h2>
+<figure class="fig"><a href="../assets/hvac/figures/fig6_slices.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/hvac/figures/fig6_slices.png" alt="Held-out value by customer segment for four policies" loading="lazy"></a></figure>
+<p>The shipped policy is best overall and on 3 of 6 segments (open estimates, weather extremes,
+first touches). Most of the gain is on <strong>open estimates, +35.93 against +8.48</strong> for
+hand-written rules. On unhappy customers every policy with the escalation rule scores between +18.6
+and +23.3, and the starter rules score highest: the hard rule, not the learned model, is doing the
+work. Hand-written rules also edge it on positive signals, and doing nothing is best on membership
+renewal. Those are reported, not hidden.</p>
+
+<figure class="fig"><a href="../assets/hvac/figures/fig7_action_distribution.png" target="_blank" rel="noopener" title="Open full size"><img src="../assets/hvac/figures/fig7_action_distribution.png" alt="Share of each action under the logged and shipped policies" loading="lazy"></a></figure>
+<p>The behaviour change is large: estimate nudges fall from 31.8% to 2.3% of decisions, and volume
+shifts to waiting, parking stale threads and scheduling. Measured on the shipped policy, it is not
+the behaviour you might guess. Only <strong>27% of scheduling offers follow a positive
+reply</strong>; most follow a stated objection (price, spouse or competitor).
+<code>ASK_OBJECTION</code> is a proactive probe, with 93% of uses coming before the customer has
+said anything. And every park comes from the hard rule, not the model.</p>
+
+<h2>What this evaluation cannot prove</h2>
+<ul>
+<li><strong>No counterfactuals.</strong> The old policy almost never waited on turn 0 of an open
+estimate, so the value of doing so is extrapolation, not measurement.</li>
+<li><strong>Thin-data actions.</strong> Parking and escalation have the least logged support (297
+and 350 rows), and the new policy uses both far more: parking goes from 1.9% to 25.7% of
+decisions. That is where the estimates are weakest.</li>
+<li><strong>Pushing a booking on an objecting customer.</strong> Because most scheduling offers
+follow an objection, the likeliest real-world failure is an offer that reads as pushy. That is a
+cost the logs price only through opt-outs.</li>
+<li><strong>Distribution shift.</strong> If the new policy changes customer behaviour, the logs no
+longer describe the world it operates in.</li>
+</ul>
+<p>The rollout plan follows from those limits: 5% of traffic, with opt-out rate and escalation
+volume as the primary rollback triggers.</p>
+</div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>&copy; <span id="year"></span> Pushkaraj Baradkar</div>
+    <div class="footer-links"><a href="../index.html">About</a><a href="../news.html">News</a><a href="../experience.html">Experience</a><a href="../projects.html">Projects</a><a href="../skills.html">Skills</a><a href="../education.html">Education</a><a href="../activities.html">Service</a></div>
+  </div>
+</footer>
+<script src="../script.js?v=ed22fb51" defer></script>
+</body>
+</html>
