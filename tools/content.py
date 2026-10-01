@@ -4,22 +4,19 @@
 SITE = {
     "name": "Pushkaraj Baradkar",
     "role": "MS Computer Science @ USC Viterbi",
-    "tagline": "I build production AI systems — search and recommendation, "
+    "tagline": "I build production AI systems: search and recommendation, "
                "generative and agentic LLM applications, real-time computer vision, "
                "and decision policies learned from logged data.",
     "blurb": (
         "Final-year Master's student in Computer Science at the <strong>University of "
-        "Southern California</strong>, graduating <strong>December 2026</strong>. "
-        "What connects my work is a bias toward systems that are <em>measured</em>: an eval "
-        "harness before a leaderboard number, three independent estimators before a policy "
-        "ships, a factor graph instead of a filter."
+        "Southern California</strong>, graduating <strong>December 2026</strong>."
     ),
-    "status": "Seeking full-time AI/ML Engineer and Research roles starting 2026–2027.",
+    "status": "Seeking full-time Software Engineering, AI/ML Engineering, and Research roles.",
     "location": "Los Angeles, CA",
     "email": "pushkarajbaradkar1@gmail.com",
     "phone": "+1 (213) 275-9348",
-    "github": "https://github.com/pushks18",
-    "linkedin": "https://linkedin.com/in/pushks18",
+    "github": "https://github.com/pushkaraj-1",
+    "linkedin": "https://www.linkedin.com/in/pushkarajbaradkar",
     "scholar": "https://scholar.google.com/citations?user=emGawekAAAAJ&hl=en",
     "photo": "assets/img/profile.jpeg",
     "resume_view_url": "https://drive.google.com/file/d/10jmVGDUbspW-O4RcJK-UkkevNug94hOk/view?usp=sharing",
@@ -36,7 +33,7 @@ QUICK_FACTS = [
 EXPERIENCE = [
     {
         "slug": "tabhi",
-        "role": "AI Engineer Intern — Search &amp; Recommendation Systems",
+        "role": "AI Engineer Intern, Search &amp; Recommendation Systems",
         "org": "Tabhi", "org_url": "https://tabhi.com",
         "logo": "assets/img/logos/tabhi.avif",
         "location": "Austin, TX", "dates": "May 2026 – Aug 2026",
@@ -59,7 +56,7 @@ EXPERIENCE = [
     },
     {
         "slug": "usc-ra",
-        "role": "Research Assistant — Real-Time AI Systems",
+        "role": "Research Assistant, Real-Time AI Systems",
         "org": "University of Southern California", "org_url": "https://www.usc.edu/",
         "logo": "assets/img/logos/usc-shield.png",
         "location": "Los Angeles, CA", "dates": "Nov 2025 – Present",
@@ -80,7 +77,7 @@ EXPERIENCE = [
     },
     {
         "slug": "usc-grader",
-        "role": "Grader — CSCI 585 Database Systems",
+        "role": "Grader, CSCI 585 Database Systems",
         "org": "University of Southern California", "org_url": "https://www.usc.edu/",
         "logo": "assets/img/logos/usc-shield.png",
         "location": "Los Angeles, CA", "dates": "Aug 2026 – Present",
@@ -97,7 +94,7 @@ EXPERIENCE = [
     },
     {
         "slug": "ymt-medical",
-        "role": "Machine Learning Intern — Edge Computer Vision",
+        "role": "Machine Learning Intern, Edge Computer Vision",
         "org": "YMT Medical", "org_url": "",
         "logo": "",
         "location": "India", "dates": "Jan 2024 – Aug 2024",
@@ -117,7 +114,7 @@ EXPERIENCE = [
     },
     {
         "slug": "technoriya",
-        "role": "Software Engineer Intern — Backend &amp; APIs",
+        "role": "Software Engineer Intern, Backend &amp; APIs",
         "org": "Technoriya ERP Solution", "org_url": "",
         "logo": "assets/img/logos/technoriya.png",
         "location": "India", "dates": "Oct 2023 – Dec 2023",
@@ -188,12 +185,12 @@ RESEARCH = [
                     "management and royalty distribution, enabling transparent and automated "
                     "compensation for artists.",
         "links": [("Paper", "https://ieeexplore.ieee.org/abstract/document/10169304"),
-                  ("Code", "https://github.com/Pushks18/Music-streaming-platform-using-blockchain"),
+                  ("Code", "https://github.com/pushkaraj-1/Music-streaming-platform-using-blockchain"),
                   ("Google Scholar", "https://scholar.google.com/citations?user=emGawekAAAAJ&hl=en")],
     },
 ]
 
-# TODO: add the rest of your activities here — same shape as the entries below.
+# TODO: add the rest of your activities here, same shape as the entries below.
 ACTIVITIES = [
     {"title": "Rotaract Club of Thane Greenspans", "role": "Community Engagement Volunteer",
      "logo": "", "dates": "Jul 2023 – Jun 2024",
@@ -206,10 +203,10 @@ ACTIVITIES = [
 ]
 
 AWARDS = [
-    ("1st Place — Syrus 2023 Hackathon", "2023"),
-    ("Second round — Smart India Hackathon (SIH) 2023", "2023"),
-    ("Finalist — IndeHub Hackathon 2025", "2025"),
-    ("CodeShastra 9.0 &amp; X — DJ Sanghvi College of Engineering", "2023–2024"),
+    ("1st Place, Syrus 2023 Hackathon", "2023"),
+    ("Second round, Smart India Hackathon (SIH) 2023", "2023"),
+    ("Finalist, IndeHub Hackathon 2025", "2025"),
+    ("CodeShastra 9.0 &amp; X, DJ Sanghvi College of Engineering", "2023–2024"),
     ("Presented at IEEE ICSCSS 2023 · SWE Conference 2025", "2023–2025"),
 ]
 
@@ -296,7 +293,7 @@ through a timing or hardware channel instead of scores.</p>
     },
 ]
 
-# (date, label, html) — sorted newest first below, so entries can be added in any order
+# (date, label, html), sorted newest first below, so entries can be added in any order
 NEWS = [
     ("2026-09", "Sep, 2026",
      'Presented <a href="talks/mlm-membership-inference.html"><em>"Quantifying Privacy Risks of Masked '
@@ -310,20 +307,20 @@ NEWS = [
      '0.958 pick score on 120 ARMBench images, 619 ms median on a laptop CPU.'),
     ("2026-05", "May, 2026",
      'Joined <a href="https://tabhi.com" target="_blank" rel="noopener"><strong>Tabhi</strong></a> as an '
-     '<strong>AI Engineer Intern</strong> (Search &amp; Recommendation Systems) in Austin, TX — hybrid '
+     '<strong>AI Engineer Intern</strong> (Search &amp; Recommendation Systems) in Austin, TX, building hybrid '
      'Elasticsearch and vector retrieval over a 450K-item catalog.'),
     ("2026-04", "Apr, 2026",
      'Contributed an <strong>RPC reliability &amp; failover redesign</strong> to the '
-     '<a href="https://github.com/DefiLlama/defillama-sdk" target="_blank" rel="noopener">DefiLlama SDK</a> — '
+     '<a href="https://github.com/DefiLlama/defillama-sdk" target="_blank" rel="noopener">DefiLlama SDK</a>, '
      'fixing endpoint override precedence and adding runtime quarantine.'),
     ("2026-02", "Feb, 2026",
      'Built <a href="https://agent-pay-lake.vercel.app/" target="_blank" rel="noopener"><strong>AgentPay</strong></a> '
-     'at the <strong>Southern California Blockchain Hackathon</strong> — an autonomous multi-agent '
+     'at the <strong>Southern California Blockchain Hackathon</strong>: an autonomous multi-agent '
      'micro-economy with on-chain payments and staked reputation.'),
     ("2025-07", "Jul, 2025",
      'Reached the <strong>final round</strong> of the <strong>IndeHub Hackathon 2025</strong>, a '
      'post-WWDC hybrid hackathon for building on Apple platforms, with '
-     '<a href="https://github.com/Pushks18/Voxel-Strides" target="_blank" rel="noopener"><strong>Voxel '
+     '<a href="https://github.com/pushkaraj-1/Voxel-Strides" target="_blank" rel="noopener"><strong>Voxel '
      'Strides</strong></a>: an iOS app that turns daily tasks into a gamified adventure, with an ARKit '
      'companion and an on-device Core ML agent that breaks goals into steps.'),
     ("2025-10", "Oct, 2025",
@@ -346,7 +343,7 @@ NEWS = [
      'Competed at <strong>CodeShastra 9.0</strong>, a 24-hour offline hackathon organised by the DJ-CSI '
      'Student Chapter at DJ Sanghvi College of Engineering, Mumbai.'),
     ("2024-01", "Jan, 2024",
-     'Joined <strong>YMT Medical</strong> as a <strong>Machine Learning Intern</strong> — on-device clinical '
+     'Joined <strong>YMT Medical</strong> as a <strong>Machine Learning Intern</strong>, building on-device clinical '
      'computer vision for micro-lesion detection and deterministic acne grading.'),
     ("2023-09", "Sep, 2023",
      'Reached the <strong>second round</strong> of the <strong>Smart India Hackathon (SIH) 2023</strong>.'),

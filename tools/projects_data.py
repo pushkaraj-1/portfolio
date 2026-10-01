@@ -16,7 +16,7 @@ PROJECTS = [
 {
  "slug":"hvac", "title":"HVAC Follow-up Policy Optimization",
  "category":"Machine Learning & Decision Systems",
- "tagline":"Offline reinforcement learning on 74.7K logged steps — fitted Q-iteration distilled into an auditable depth-10 decision tree, checked by three off-policy estimators that first had to recover the old policy's known value.",
+ "tagline":"Offline reinforcement learning on 74.7K logged steps: fitted Q-iteration distilled into an auditable depth-10 decision tree, checked by three off-policy estimators that first had to recover the old policy's known value.",
  "short":"Offline RL that learns <em>when not to act</em>. FQI distilled into a depth-10 tree with guardrails; value per thread from −13.46 to +15.25.",
  "image": H+"fig1_system_overview.png", "dates":"Aug 2026",
  "tags":["Offline RL","Fitted Q-Iteration","Off-policy Evaluation","Policy Distillation","scikit-learn","Python"],
@@ -110,14 +110,14 @@ volume as the primary rollback triggers.</p>
 {
  "slug":"travel-agent", "title":"Eval-Gated Skill Development",
  "category":"Agentic AI & LLM Systems",
- "tagline":"An agent-skills platform where every skill must prove its value on a 466-task bank before it can ship — A/B evals wired into CI gates at ~$0.03 per PR.",
+ "tagline":"An agent-skills platform where every skill must prove its value on a 466-task bank before it can ship, with A/B evals wired into CI gates at ~$0.03 per PR.",
  "short":"A skill does not merge unless an eval proves it helps. 17-skill registry, 466-task bank, 3-tier CI gates.",
  "image": D+"travel-agent.svg", "dates":"May 2026 – Jun 2026",
  "tags":["LangGraph","FastAPI","Streamlit","Langfuse","Thompson Sampling","CI/CD"],
  "links":[],
  "body": f"""
 <p>Most agent "skills" are added on vibes: someone writes a prompt fragment, it looks better on
-three examples, it ships. This project treats a skill like a code change — <strong>it does not
+three examples, it ships. This project treats a skill like a code change: <strong>it does not
 merge unless an eval proves it helps.</strong></p>
 
 {fig(D+"travel-agent.svg","Eval-gated skill development pipeline")}
@@ -125,7 +125,7 @@ merge unless an eval proves it helps.</strong></p>
 <h2>The platform</h2>
 <p>A <strong>versioned 17-skill registry</strong> with a release CLI, and a LangGraph
 travel-planning agent as the system under test. Versioning matters because a skill's effect is only
-meaningful relative to a specific agent version and task set — without it, "this skill helps" is an
+meaningful relative to a specific agent version and task set. Without it, "this skill helps" is an
 unfalsifiable claim.</p>
 
 <h2>The measurement</h2>
@@ -134,8 +134,8 @@ same tasks from a <strong>466-task bank</strong>, differing only in whether the 
 context. That difference is the skill's contribution, isolated from everything else. The top skill
 measured at <strong>+17 points</strong>.</p>
 
-<p>This runs as <strong>3-tier CI gates</strong> — a cheap smoke tier, a regression tier, then the
-full bank — so most pull requests are settled by the cheap tier and the full run is reserved for
+<p>This runs as <strong>3-tier CI gates</strong> (a cheap smoke tier, a regression tier, then the
+full bank), so most pull requests are settled by the cheap tier and the full run is reserved for
 changes that survive it. The whole gate costs about <strong>$0.03 per PR</strong>, which is what
 makes running it on every change realistic rather than aspirational.</p>
 
@@ -148,7 +148,7 @@ and unevenly sampled, and the sampler naturally spends its budget on skills whos
 ambiguous rather than re-confirming known winners.</p>
 
 <p>Separately, <strong>13.9K collected traces</strong> exposed and retired a router that was
-<strong>misrouting 35% of tasks</strong> — a failure invisible in aggregate score, and only
+<strong>misrouting 35% of tasks</strong>, a failure invisible in aggregate score, and only
 findable because the traces were there to inspect.</p>
 """},
 
@@ -159,10 +159,10 @@ findable because the traces were there to inspect.</p>
  "short":"Agents hire and pay each other on-chain. Reputation is bonded capital, so cheating is economically punished rather than merely recorded.",
  "image": D+"agentpay.svg", "dates":"Feb 2026",
  "tags":["Rust","Anchor","Solana","Avalanche","LangChain","Next.js","D3.js"],
- "links":[("Live demo","https://agent-pay-lake.vercel.app/"),("GitHub","https://github.com/Pushks18/AgentPay")],
+ "links":[("Live demo","https://agent-pay-lake.vercel.app/"),("GitHub","https://github.com/pushkaraj-1/AgentPay")],
  "body": f"""
 <p><strong>AgentPay</strong> is a decentralized agent economy: agents autonomously discover one
-another, negotiate work, and settle payment on-chain — no human in the loop. Built at the
+another, negotiate work, and settle payment on-chain, with no human in the loop. Built at the
 <strong>Southern California Blockchain Hackathon (SCBC 2026)</strong>.</p>
 
 {fig(D+"agentpay.svg","AgentPay architecture")}
@@ -173,18 +173,18 @@ garbage? There is no shared principal to appeal to, and no reputation system tha
 cannot escape.</p>
 
 <p>AgentPay answers this with <strong>escrow plus stake slashing</strong>. Reputation is a
-<em>bonded</em> asset rather than a score in a database — an agent must put capital at risk to
+<em>bonded</em> asset rather than a score in a database: an agent must put capital at risk to
 participate, and dishonest work destroys that capital. This makes cheating economically punished
 rather than merely recorded, and makes a throwaway identity expensive instead of free.</p>
 
 <h2>Architecture</h2>
 <ul>
-<li><strong>Smart contract layer</strong> — Rust/Anchor programs on Solana and Avalanche
+<li><strong>Smart contract layer:</strong> Rust/Anchor programs on Solana and Avalanche
 implementing the agent registry, escrow accounts, reputation staking, and slashing conditions.</li>
-<li><strong>Agent orchestration</strong> — LangChain multi-agent workflows with custom
+<li><strong>Agent orchestration:</strong> LangChain multi-agent workflows with custom
 <code>x402</code> payment tooling, achieving sub-30s end-to-end cycles from discovery through
 settlement.</li>
-<li><strong>Live visualizer</strong> — a Next.js + D3.js dashboard streaming agent interactions,
+<li><strong>Live visualizer:</strong> a Next.js + D3.js dashboard streaming agent interactions,
 network topology, and payment flows over WebSockets.</li>
 </ul>
 """},
@@ -196,11 +196,11 @@ PROJECTS += [
 {
  "slug":"warp-tote", "title":"Warehouse Tote Perception",
  "category":"Computer Vision & Perception",
- "tagline":"A four-stage vision pipeline for a robotic pack station: find the tote, segment what is in it, decide what is an item, and place the suction cup — 0.958 pick score at 619 ms on a laptop.",
+ "tagline":"A four-stage vision pipeline for a robotic pack station: find the tote, segment what is in it, decide what is an item, and place the suction cup. 0.958 pick score at 619 ms on a laptop.",
  "short":"Where should the suction cup land? FastSAM proposals, a 2-of-3 tote/item vote, and a distance-transform pick point: 0.958 pick score vs 0.31 baseline.",
  "image": W+"fig12_stages.jpg", "dates":"Aug 2026",
  "tags":["FastSAM","OpenCV","PyTorch","Segmentation","Robotic Picking","Python"],
- "links":[("GitHub","https://github.com/Pushks18/warp-robotics")],
+ "links":[("GitHub","https://github.com/pushkaraj-1/warp-robotics")],
  "body": f"""
 <p>Given a top-down photo of a warehouse tote, the pipeline answers three questions: what is in
 there, where should the suction cup land, and is this a tote the robot should attempt at all.
@@ -280,7 +280,7 @@ clock differs.</p>
 {
  "slug":"dp-adult", "title":"Differentially Private Analysis of the UCI Adult Dataset",
  "category":"Privacy & Trustworthy ML",
- "tagline":"A count, a top-3 selection, and a logistic regression released under pure ε-differential privacy with IBM diffprivlib — plus an empirical study of what each design decision actually costs.",
+ "tagline":"A count, a top-3 selection, and a logistic regression released under pure ε-differential privacy with IBM diffprivlib, plus an empirical study of what each design decision actually costs.",
  "short":"Three DP releases budget-capped at ε = 3, a differencing attack that shows why the cap matters, and an ablation that proved my own budget hypothesis backwards.",
  "image": D+"dp-adult.svg", "dates":"Sep 2026",
  "tags":["Differential Privacy","diffprivlib","scikit-learn","Python"],
@@ -359,7 +359,7 @@ schema ranges and clipped, bounding every row's norm by √3 without looking at 
  "short":"Raw feeds to readable digest. Zero-shot classification means the topic taxonomy can change without retraining.",
  "image": D+"infodistill.svg", "dates":"2025",
  "tags":["FastAPI","Hugging Face","BART","Zero-Shot","React","Python"],
- "links":[("Live site","https://info-distill.vercel.app/"),("GitHub","https://github.com/Pushks18/Info-Distill")],
+ "links":[("Live site","https://info-distill.vercel.app/"),("GitHub","https://github.com/pushkaraj-1/Info-Distill")],
  "body": f"""
 <p><strong>InfoDistill</strong> automates the whole path from raw source to readable digest: pull
 technical articles from multiple feeds, classify them by topic, and summarize them.</p>
@@ -367,20 +367,20 @@ technical articles from multiple feeds, classify them by topic, and summarize th
 {fig(D+"infodistill.svg","InfoDistill pipeline")}
 
 <p>Classification is <strong>zero-shot</strong> rather than a trained classifier, which means new
-topic labels can be added without collecting labeled data or retraining — an important property
+topic labels can be added without collecting labeled data or retraining, an important property
 when the taxonomy of "things worth reading" shifts every few months. Summarization runs on
 <strong>BART</strong>, chosen for abstractive quality on long-form technical prose rather than
 extractive sentence-picking.</p>
 
 <p>The FastAPI backend composes the stages so extraction, classification, and summarization can
-each be run and debugged independently — which matters because these failure modes look identical
+each be run and debugged independently, which matters because these failure modes look identical
 from the outside: a bad digest could be a parse failure, a misclassification, or a bad summary.</p>
 """},
 
 {
  "slug":"nei-slam", "title":"Real-Time Visual SLAM with Learned Features",
  "category":"Computer Vision & Perception",
- "tagline":"Monocular VO on an XFeat/LighterGlue frontend, NetVLAD loop closure, and a C++ GTSAM factor-graph backend — ~95 m to ~1.2 m ATE on KITTI.",
+ "tagline":"Monocular VO on an XFeat/LighterGlue frontend, NetVLAD loop closure, and a C++ GTSAM factor-graph backend: ~95 m to ~1.2 m ATE on KITTI.",
  "short":"Learned features survive motion blur where ORB and SIFT do not; a factor graph lets loop closures correct drift retroactively.",
  "image": D+"slam.svg", "dates":"Nov 2025 – May 2026",
  "tags":["C++","GTSAM","PyTorch","OpenCV","XFeat","NetVLAD","FAISS","CMake"],
@@ -395,29 +395,29 @@ sudden rotation, and no reliable depth sensor.</p>
 <p>Two decisions drive the design. Classical hand-crafted detectors (ORB, SIFT) degrade badly under
 blur, so the frontend runs <strong>learned features</strong>. And the backend is a <strong>factor
 graph</strong> rather than a filter, so loop closures and sparse depth can correct drift
-<em>retroactively</em> — a filter would have already marginalized that information away.</p>
+<em>retroactively</em>; a filter would have already marginalized that information away.</p>
 
 <h2>What each stage does</h2>
 <ul>
-<li><strong>VO frontend</strong> — XFeat keypoints with LighterGlue matching per frame pair, then
+<li><strong>VO frontend:</strong> XFeat keypoints with LighterGlue matching per frame pair, then
 <code>findEssentialMat</code> (RANSAC) and <code>recoverPose</code> for relative rotation and
 translation. Translation is unit-norm; metric scale is recovered later in the backend.</li>
-<li><strong>Simulated ToF depth</strong> — rather than relying on a 360° LiDAR the wearable does
+<li><strong>Simulated ToF depth:</strong> rather than relying on a 360° LiDAR the wearable does
 not have, depth comes from the stereo pair via OpenCV SGBM disparity
 (<code>Z = fx · baseline / d</code>), sampled on a 4×4 grid over the central image region to emit
 16 <code>(u, v, Z)</code> tuples per frame.</li>
-<li><strong>Place recognition</strong> — every 10th frame becomes a keyframe with a 64-cluster
+<li><strong>Place recognition:</strong> every 10th frame becomes a keyframe with a 64-cluster
 NetVLAD descriptor (VGG16 conv5_3 → NetVLAD → L2-normalized, dim 32768), indexed in FAISS. Top-5 L2
 search, rejecting anything within 100 frames of the current pose.</li>
-<li><strong>Loop verification</strong> — candidates are re-matched with XFeat and pose-checked,
+<li><strong>Loop verification:</strong> candidates are re-matched with XFeat and pose-checked,
 accepted only at ≥150 RANSAC inliers <strong>and</strong> ≥0.25 inlier ratio. Only the rotation is
 kept: the loop factor uses tight rotation noise (σ = 0.1 rad) and effectively-free translation
 (σ = 100 m), so metric scale stays anchored to GPS and depth rather than leaking in through loop
 closures.</li>
-<li><strong>C++ GTSAM backend</strong> — a <code>NonlinearFactorGraph</code> combining a prior at
+<li><strong>C++ GTSAM backend:</strong> a <code>NonlinearFactorGraph</code> combining a prior at
 the origin, <code>BetweenFactorPose3</code> odometry with noise scaled by inverse inlier ratio,
 <code>GenericProjectionFactor</code> for each depth point under a Huber-robust 4px cost, periodic
-<code>GPSFactor</code> constraints, and loop-closure between-factors — solved with
+<code>GPSFactor</code> constraints, and loop-closure between-factors, solved with
 Levenberg–Marquardt.</li>
 </ul>
 
@@ -432,11 +432,11 @@ failures also reduced tracking dropouts by ~30%.</p>
 {
  "slug":"godot-mcp", "title":"Godot MCP",
  "category":"Developer Tools & Open Source",
- "tagline":"An MCP server letting LLM agents drive the Godot 4 engine in natural language — 30+ tools behind strict path validation.",
+ "tagline":"An MCP server letting LLM agents drive the Godot 4 engine in natural language, with 30+ tools behind strict path validation.",
  "short":"LLM agents control a game engine. The tool boundary is the security boundary, so it has to hold even when the model is wrong.",
  "image": D+"godot-mcp.svg", "dates":"Apr 2026 – Present",
  "tags":["TypeScript","Node.js","MCP","Godot 4","CI/CD"],
- "links":[("GitHub","https://github.com/Pushks18/Godot-MCP-Pilot")],
+ "links":[("GitHub","https://github.com/pushkaraj-1/Godot-MCP-Pilot")],
  "body": f"""
 <p>An MCP server that lets LLM agents (Claude, Cursor) control <strong>Godot 4</strong> projects
 through natural language. Used by <strong>10+ active users</strong>.</p>
@@ -445,13 +445,13 @@ through natural language. Used by <strong>10+ active users</strong>.</p>
 
 <h2>Design</h2>
 <p><strong>30+ tools</strong> span scene manipulation, script authoring, project execution, and
-asset management — enough surface area for end-to-end 2D and 3D workflow automation rather than a
+asset management: enough surface area for end-to-end 2D and 3D workflow automation rather than a
 demo that can only do one thing.</p>
 
 <p>The part that needed the most care is <strong>path validation</strong>. An agent with write
 access to a project directory and a natural-language interface is one hallucinated path away from
 writing outside the project. Every filesystem-touching tool validates and sandboxes its paths, and
-routing is structured rather than string-assembled — the tool boundary is the security boundary, so
+routing is structured rather than string-assembled. The tool boundary is the security boundary, so
 it has to hold even when the model is wrong.</p>
 
 <p>Beyond the tools: CI/CD, auto-config detection so the server finds a Godot install without
@@ -459,7 +459,7 @@ manual setup, and multi-client integration so the same server works across IDEs.
 """},
 
 {
- "slug":"defillama", "title":"DefiLlama SDK — RPC Reliability &amp; Failover",
+ "slug":"defillama", "title":"DefiLlama SDK: RPC Reliability &amp; Failover",
  "category":"Developer Tools & Open Source",
  "tagline":"Open-source contribution redesigning RPC endpoint resolution and adding runtime quarantine with cooldown to a production Web3 SDK.",
  "short":"User endpoints were silently overridden by defaults. Fixed resolution order, then added quarantine so one bad provider cannot degrade everything.",
@@ -474,8 +474,8 @@ on-chain data access, fixing how the SDK resolves and recovers from RPC endpoint
 
 <h2>The bug</h2>
 <p>User-supplied RPC endpoints were being silently overridden by defaults (<em>Fixes #162</em>). If
-you configured your own node — typically because you were paying for reliability the public
-endpoints do not provide — the SDK could ignore it. Worse, it failed silently: you would see
+you configured your own node (typically because you were paying for reliability the public
+endpoints do not provide), the SDK could ignore it. Worse, it failed silently: you would see
 degraded performance with no signal that your configuration was not being used. I redesigned the
 chain RPC resolution logic so user-defined endpoints correctly take priority.</p>
 
@@ -484,7 +484,7 @@ chain RPC resolution logic so user-defined endpoints correctly take priority.</p
 downstream call. I added <strong>runtime RPC quarantine</strong>: an endpoint that fails 5 times is
 pulled from rotation for a 10-minute cooldown, then allowed back.</p>
 
-<p>The cooldown is the important detail. Permanently blacklisting a failing endpoint is wrong — most
+<p>The cooldown is the important detail. Permanently blacklisting a failing endpoint is wrong: most
 RPC failures are transient, and a provider having a bad minute should not be discarded for the life
 of the process. Quarantine bounds the blast radius without making the decision irreversible.</p>
 

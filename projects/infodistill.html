@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>InfoDistill — Pushkaraj Baradkar</title>
+<title>InfoDistill | Pushkaraj Baradkar</title>
 <meta name="description" content="An agentic research-summarization platform that extracts, classifies, and condenses technical articles using BART and zero-shot classification.">
 <meta name="theme-color" content="#1e3a8a">
-<link rel="stylesheet" href="../styles.css?v=d7e26e79">
+<link rel="stylesheet" href="../styles.css?v=479292b4">
 <link rel="icon" href="../assets/img/profile.jpeg">
 <script>
 (function(){try{var t=localStorage.getItem('theme');
@@ -46,7 +46,7 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
       <div class="section-divider"></div>
       <p class="page-lede">An agentic research-summarization platform that extracts, classifies, and condenses technical articles using BART and zero-shot classification.</p>
       <div class="tag-row"><span class="tag">FastAPI</span><span class="tag">Hugging Face</span><span class="tag">BART</span><span class="tag">Zero-Shot</span><span class="tag">React</span><span class="tag">Python</span></div>
-      <div class="pub-actions"><a class="btn-chip" href="https://info-distill.vercel.app/" target="_blank" rel="noopener">Live site</a><a class="btn-chip" href="https://github.com/Pushks18/Info-Distill" target="_blank" rel="noopener">GitHub</a></div>
+      <div class="pub-actions"><a class="btn-chip" href="https://info-distill.vercel.app/" target="_blank" rel="noopener">Live site</a><a class="btn-chip" href="https://github.com/pushkaraj-1/Info-Distill" target="_blank" rel="noopener">GitHub</a></div>
       <div class="prose">
 <p><strong>InfoDistill</strong> automates the whole path from raw source to readable digest: pull
 technical articles from multiple feeds, classify them by topic, and summarize them.</p>
@@ -54,13 +54,13 @@ technical articles from multiple feeds, classify them by topic, and summarize th
 <figure class="fig"><a href="../assets/img/diagrams/infodistill.svg" target="_blank" rel="noopener" title="Open full size"><img src="../assets/img/diagrams/infodistill.svg" alt="InfoDistill pipeline" loading="lazy"></a></figure>
 
 <p>Classification is <strong>zero-shot</strong> rather than a trained classifier, which means new
-topic labels can be added without collecting labeled data or retraining — an important property
+topic labels can be added without collecting labeled data or retraining, an important property
 when the taxonomy of "things worth reading" shifts every few months. Summarization runs on
 <strong>BART</strong>, chosen for abstractive quality on long-form technical prose rather than
 extractive sentence-picking.</p>
 
 <p>The FastAPI backend composes the stages so extraction, classification, and summarization can
-each be run and debugged independently — which matters because these failure modes look identical
+each be run and debugged independently, which matters because these failure modes look identical
 from the outside: a bad digest could be a parse failure, a misclassification, or a bad summary.</p>
 </div>
     </div>

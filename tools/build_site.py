@@ -306,7 +306,7 @@ def page_index():
     </div>
     <p>{SITE['blurb']}</p>
     <p>{SITE['tagline']}</p>
-    <p class="status-line">{SITE['status']}</p>
+    {f'<p class="status-line">{SITE["status"]}</p>' if SITE.get("status") else ""}
     <div class="nav-cta hero-cta">{resume_ctas()}</div>
     <dl class="facts">{facts}</dl>
   </div>
@@ -365,7 +365,7 @@ def page_index():
     {edu}
   </div>
 </main>"""
-    return shell(f"{SITE['name']} — {SITE['role']}", body, 0, SITE["tagline"], "index.html")
+    return shell(f"{SITE['name']} | {SITE['role']}", body, 0, SITE["tagline"], "index.html")
 
 def simple_page(title, lede, inner, active, depth=0):
     body = f"""<main class="container inner-page">
@@ -378,7 +378,7 @@ def simple_page(title, lede, inner, active, depth=0):
     </div>
   </section>
 </main>"""
-    return shell(f"{re.sub('<[^>]+>', '', title)} — {SITE['name']}", body, depth, strip(lede), active)
+    return shell(f"{re.sub('<[^>]+>', '', title)} | {SITE['name']}", body, depth, strip(lede), active)
 
 def page_experience():
     inner = ('<ul class="clean-list experience-list detailed">'
@@ -440,7 +440,7 @@ def page_project(p):
     </div>
   </section>
 </main>"""
-    return shell(f"{p['title']} — {SITE['name']}", body, 1, p["tagline"], "projects.html")
+    return shell(f"{p['title']} | {SITE['name']}", body, 1, p["tagline"], "projects.html")
 
 def page_talk(t):
     links = "".join(f'<a class="btn-chip" href="{u}" target="_blank" rel="noopener">{n}</a>'
@@ -460,7 +460,7 @@ def page_talk(t):
     </div>
   </section>
 </main>"""
-    return shell(f"{strip(t['title'])} — {SITE['name']}", body, 1, strip(t["abstract"]), "index.html")
+    return shell(f"{strip(t['title'])} | {SITE['name']}", body, 1, strip(t["abstract"]), "index.html")
 
 # --------------------------------------------------------------- search idx
 def strip(s): return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", s)).strip()
@@ -472,7 +472,7 @@ def build_index():
                     "d": strip(p["tagline"]),
                     "s": strip(p["title"] + " " + p["tagline"] + " " + " ".join(p["tags"]) + " " + p["body"])[:1800]})
     for e in EXPERIENCE:
-        idx.append({"t": f'{strip(e["role"])} — {e["org"]}', "k": "Experience", "u": "experience.html",
+        idx.append({"t": f'{strip(e["role"])} at {e["org"]}', "k": "Experience", "u": "experience.html",
                     "d": strip(e["summary"]),
                     "s": strip(" ".join([e["role"], e["org"], e["summary"], *e["points"], *e["tags"]]))})
     for e in EDUCATION:

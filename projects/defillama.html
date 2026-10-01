@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DefiLlama SDK — RPC Reliability &amp;amp; Failover — Pushkaraj Baradkar</title>
+<title>DefiLlama SDK: RPC Reliability &amp;amp; Failover | Pushkaraj Baradkar</title>
 <meta name="description" content="Open-source contribution redesigning RPC endpoint resolution and adding runtime quarantine with cooldown to a production Web3 SDK.">
 <meta name="theme-color" content="#1e3a8a">
-<link rel="stylesheet" href="../styles.css?v=d7e26e79">
+<link rel="stylesheet" href="../styles.css?v=479292b4">
 <link rel="icon" href="../assets/img/profile.jpeg">
 <script>
 (function(){try{var t=localStorage.getItem('theme');
@@ -42,7 +42,7 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
     <div class="container">
       <a class="back-link" href="../projects.html">&larr; All projects</a>
       <div class="item-meta">Developer Tools & Open Source &middot; Apr 2026</div>
-      <h1 class="page-title">DefiLlama SDK — RPC Reliability &amp; Failover</h1>
+      <h1 class="page-title">DefiLlama SDK: RPC Reliability &amp; Failover</h1>
       <div class="section-divider"></div>
       <p class="page-lede">Open-source contribution redesigning RPC endpoint resolution and adding runtime quarantine with cooldown to a production Web3 SDK.</p>
       <div class="tag-row"><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">Web3</span><span class="tag">Jest</span><span class="tag">Open Source</span></div>
@@ -55,8 +55,8 @@ on-chain data access, fixing how the SDK resolves and recovers from RPC endpoint
 
 <h2>The bug</h2>
 <p>User-supplied RPC endpoints were being silently overridden by defaults (<em>Fixes #162</em>). If
-you configured your own node — typically because you were paying for reliability the public
-endpoints do not provide — the SDK could ignore it. Worse, it failed silently: you would see
+you configured your own node (typically because you were paying for reliability the public
+endpoints do not provide), the SDK could ignore it. Worse, it failed silently: you would see
 degraded performance with no signal that your configuration was not being used. I redesigned the
 chain RPC resolution logic so user-defined endpoints correctly take priority.</p>
 
@@ -65,7 +65,7 @@ chain RPC resolution logic so user-defined endpoints correctly take priority.</p
 downstream call. I added <strong>runtime RPC quarantine</strong>: an endpoint that fails 5 times is
 pulled from rotation for a 10-minute cooldown, then allowed back.</p>
 
-<p>The cooldown is the important detail. Permanently blacklisting a failing endpoint is wrong — most
+<p>The cooldown is the important detail. Permanently blacklisting a failing endpoint is wrong: most
 RPC failures are transient, and a provider having a bad minute should not be discarded for the life
 of the process. Quarantine bounds the blast radius without making the decision irreversible.</p>
 

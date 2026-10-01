@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Eval-Gated Skill Development — Pushkaraj Baradkar</title>
-<meta name="description" content="An agent-skills platform where every skill must prove its value on a 466-task bank before it can ship — A/B evals wired into CI gates at ~$0.03 per PR.">
+<title>Eval-Gated Skill Development | Pushkaraj Baradkar</title>
+<meta name="description" content="An agent-skills platform where every skill must prove its value on a 466-task bank before it can ship, with A/B evals wired into CI gates at ~$0.03 per PR.">
 <meta name="theme-color" content="#1e3a8a">
-<link rel="stylesheet" href="../styles.css?v=d7e26e79">
+<link rel="stylesheet" href="../styles.css?v=479292b4">
 <link rel="icon" href="../assets/img/profile.jpeg">
 <script>
 (function(){try{var t=localStorage.getItem('theme');
@@ -44,12 +44,12 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
       <div class="item-meta">Agentic AI & LLM Systems &middot; May 2026 – Jun 2026</div>
       <h1 class="page-title">Eval-Gated Skill Development</h1>
       <div class="section-divider"></div>
-      <p class="page-lede">An agent-skills platform where every skill must prove its value on a 466-task bank before it can ship — A/B evals wired into CI gates at ~$0.03 per PR.</p>
+      <p class="page-lede">An agent-skills platform where every skill must prove its value on a 466-task bank before it can ship, with A/B evals wired into CI gates at ~$0.03 per PR.</p>
       <div class="tag-row"><span class="tag">LangGraph</span><span class="tag">FastAPI</span><span class="tag">Streamlit</span><span class="tag">Langfuse</span><span class="tag">Thompson Sampling</span><span class="tag">CI/CD</span></div>
       <div class="pub-actions"></div>
       <div class="prose">
 <p>Most agent "skills" are added on vibes: someone writes a prompt fragment, it looks better on
-three examples, it ships. This project treats a skill like a code change — <strong>it does not
+three examples, it ships. This project treats a skill like a code change: <strong>it does not
 merge unless an eval proves it helps.</strong></p>
 
 <figure class="fig"><a href="../assets/img/diagrams/travel-agent.svg" target="_blank" rel="noopener" title="Open full size"><img src="../assets/img/diagrams/travel-agent.svg" alt="Eval-gated skill development pipeline" loading="lazy"></a></figure>
@@ -57,7 +57,7 @@ merge unless an eval proves it helps.</strong></p>
 <h2>The platform</h2>
 <p>A <strong>versioned 17-skill registry</strong> with a release CLI, and a LangGraph
 travel-planning agent as the system under test. Versioning matters because a skill's effect is only
-meaningful relative to a specific agent version and task set — without it, "this skill helps" is an
+meaningful relative to a specific agent version and task set. Without it, "this skill helps" is an
 unfalsifiable claim.</p>
 
 <h2>The measurement</h2>
@@ -66,8 +66,8 @@ same tasks from a <strong>466-task bank</strong>, differing only in whether the 
 context. That difference is the skill's contribution, isolated from everything else. The top skill
 measured at <strong>+17 points</strong>.</p>
 
-<p>This runs as <strong>3-tier CI gates</strong> — a cheap smoke tier, a regression tier, then the
-full bank — so most pull requests are settled by the cheap tier and the full run is reserved for
+<p>This runs as <strong>3-tier CI gates</strong> (a cheap smoke tier, a regression tier, then the
+full bank), so most pull requests are settled by the cheap tier and the full run is reserved for
 changes that survive it. The whole gate costs about <strong>$0.03 per PR</strong>, which is what
 makes running it on every change realistic rather than aspirational.</p>
 
@@ -80,7 +80,7 @@ and unevenly sampled, and the sampler naturally spends its budget on skills whos
 ambiguous rather than re-confirming known winners.</p>
 
 <p>Separately, <strong>13.9K collected traces</strong> exposed and retired a router that was
-<strong>misrouting 35% of tasks</strong> — a failure invisible in aggregate score, and only
+<strong>misrouting 35% of tasks</strong>, a failure invisible in aggregate score, and only
 findable because the traces were there to inspect.</p>
 </div>
     </div>

@@ -800,7 +800,7 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:12px;letter-spacing:.2px}
   overflow: hidden;          /* contain fades */
 }
 
-/* the actual scrollable area — height is per-section via --scroll-max */
+/* the actual scrollable area: height is per-section via --scroll-max */
 .scroll-card .scroll-body {
   max-height: var(--scroll-max, 320px);
   overflow-y: auto;
@@ -894,7 +894,7 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:12px;letter-spacing:.2px}
 
 
 /* ============================================================
-   Datasheet theme — fieldset-style panels (title notched into border)
+   Datasheet theme: fieldset-style panels (title notched into border)
    ============================================================ */
 :root{
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
@@ -957,7 +957,7 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:12px;letter-spacing:.2px}
 }
 .content #publications, .content #experience, .content #skills, .content #education{ margin-bottom:22px; }   /* gap between stacked content panels */
 
-/* Old cyan divider not needed — the legend defines the header */
+/* Old cyan divider not needed: the legend defines the header */
 #service .section-divider,
 #projects .section-divider,
 #publications .section-divider,
@@ -996,7 +996,7 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:12px;letter-spacing:.2px}
   padding-right:18px;
 }
 
-/* Facts strip — same bordered datasheet look */
+/* Facts strip: same bordered datasheet look */
 .facts{
   margin:18px 0 4px;
   border:1.5px solid var(--rule);
@@ -1015,7 +1015,7 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:12px;letter-spacing:.2px}
 }
 .facts dd.fact-v{ margin:0; padding:9px 12px; color:var(--text); }
 
-/* Athletics — compact PR cards (datasheet style) */
+/* Athletics: compact PR cards (datasheet style) */
 .pr-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
 .pr-card{
   border:1.5px solid var(--rule);
@@ -1033,7 +1033,7 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:12px;letter-spacing:.2px}
 .pr-card .pr-note{ margin:6px 0 0; color:var(--muted); font-size:.68rem; letter-spacing:.04em; }
 @media (max-width:480px){ .pr-grid{ grid-template-columns:1fr; } }
 
-/* Athletics — race photo gallery below the timing box (uniform tiles) */
+/* Athletics: race photo gallery below the timing box (uniform tiles) */
 .race-gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
 .race-shot{ margin:0; }
 .race-frame{
@@ -1085,7 +1085,7 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:12px;letter-spacing:.2px}
 
 
 /* ============================================================
-   Header — theme-aware bar with presence (crisp edge + soft lift)
+   Header: theme-aware bar with presence (crisp edge + soft lift)
    Light: stays light, separated by a clear border + gentle shadow.
    Dark:  stays dark, separated by a hairline + subtle shadow.
    ============================================================ */
@@ -1123,7 +1123,7 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:12px;letter-spacing:.2px}
 }
 
 /* =========================================================================
-   Additions — components the base layout does not include
+   Additions: components the base layout does not include
    (search, resume CTAs, skills, education, inner pages, project prose)
    ========================================================================= */
 

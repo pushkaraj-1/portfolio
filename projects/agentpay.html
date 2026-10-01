@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AgentPay — Pushkaraj Baradkar</title>
+<title>AgentPay | Pushkaraj Baradkar</title>
 <meta name="description" content="An autonomous agent economy where AI agents discover, hire, and pay each other on-chain, with reputation staked as collateral against bad work.">
 <meta name="theme-color" content="#1e3a8a">
-<link rel="stylesheet" href="../styles.css?v=d7e26e79">
+<link rel="stylesheet" href="../styles.css?v=479292b4">
 <link rel="icon" href="../assets/img/profile.jpeg">
 <script>
 (function(){try{var t=localStorage.getItem('theme');
@@ -46,10 +46,10 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
       <div class="section-divider"></div>
       <p class="page-lede">An autonomous agent economy where AI agents discover, hire, and pay each other on-chain, with reputation staked as collateral against bad work.</p>
       <div class="tag-row"><span class="tag">Rust</span><span class="tag">Anchor</span><span class="tag">Solana</span><span class="tag">Avalanche</span><span class="tag">LangChain</span><span class="tag">Next.js</span><span class="tag">D3.js</span></div>
-      <div class="pub-actions"><a class="btn-chip" href="https://agent-pay-lake.vercel.app/" target="_blank" rel="noopener">Live demo</a><a class="btn-chip" href="https://github.com/Pushks18/AgentPay" target="_blank" rel="noopener">GitHub</a></div>
+      <div class="pub-actions"><a class="btn-chip" href="https://agent-pay-lake.vercel.app/" target="_blank" rel="noopener">Live demo</a><a class="btn-chip" href="https://github.com/pushkaraj-1/AgentPay" target="_blank" rel="noopener">GitHub</a></div>
       <div class="prose">
 <p><strong>AgentPay</strong> is a decentralized agent economy: agents autonomously discover one
-another, negotiate work, and settle payment on-chain — no human in the loop. Built at the
+another, negotiate work, and settle payment on-chain, with no human in the loop. Built at the
 <strong>Southern California Blockchain Hackathon (SCBC 2026)</strong>.</p>
 
 <figure class="fig"><a href="../assets/img/diagrams/agentpay.svg" target="_blank" rel="noopener" title="Open full size"><img src="../assets/img/diagrams/agentpay.svg" alt="AgentPay architecture" loading="lazy"></a></figure>
@@ -60,18 +60,18 @@ garbage? There is no shared principal to appeal to, and no reputation system tha
 cannot escape.</p>
 
 <p>AgentPay answers this with <strong>escrow plus stake slashing</strong>. Reputation is a
-<em>bonded</em> asset rather than a score in a database — an agent must put capital at risk to
+<em>bonded</em> asset rather than a score in a database: an agent must put capital at risk to
 participate, and dishonest work destroys that capital. This makes cheating economically punished
 rather than merely recorded, and makes a throwaway identity expensive instead of free.</p>
 
 <h2>Architecture</h2>
 <ul>
-<li><strong>Smart contract layer</strong> — Rust/Anchor programs on Solana and Avalanche
+<li><strong>Smart contract layer:</strong> Rust/Anchor programs on Solana and Avalanche
 implementing the agent registry, escrow accounts, reputation staking, and slashing conditions.</li>
-<li><strong>Agent orchestration</strong> — LangChain multi-agent workflows with custom
+<li><strong>Agent orchestration:</strong> LangChain multi-agent workflows with custom
 <code>x402</code> payment tooling, achieving sub-30s end-to-end cycles from discovery through
 settlement.</li>
-<li><strong>Live visualizer</strong> — a Next.js + D3.js dashboard streaming agent interactions,
+<li><strong>Live visualizer:</strong> a Next.js + D3.js dashboard streaming agent interactions,
 network topology, and payment flows over WebSockets.</li>
 </ul>
 </div>

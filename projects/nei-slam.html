@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Real-Time Visual SLAM with Learned Features — Pushkaraj Baradkar</title>
-<meta name="description" content="Monocular VO on an XFeat/LighterGlue frontend, NetVLAD loop closure, and a C++ GTSAM factor-graph backend — ~95 m to ~1.2 m ATE on KITTI.">
+<title>Real-Time Visual SLAM with Learned Features | Pushkaraj Baradkar</title>
+<meta name="description" content="Monocular VO on an XFeat/LighterGlue frontend, NetVLAD loop closure, and a C++ GTSAM factor-graph backend: ~95 m to ~1.2 m ATE on KITTI.">
 <meta name="theme-color" content="#1e3a8a">
-<link rel="stylesheet" href="../styles.css?v=d7e26e79">
+<link rel="stylesheet" href="../styles.css?v=479292b4">
 <link rel="icon" href="../assets/img/profile.jpeg">
 <script>
 (function(){try{var t=localStorage.getItem('theme');
@@ -44,7 +44,7 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
       <div class="item-meta">Computer Vision & Perception &middot; Nov 2025 – May 2026</div>
       <h1 class="page-title">Real-Time Visual SLAM with Learned Features</h1>
       <div class="section-divider"></div>
-      <p class="page-lede">Monocular VO on an XFeat/LighterGlue frontend, NetVLAD loop closure, and a C++ GTSAM factor-graph backend — ~95 m to ~1.2 m ATE on KITTI.</p>
+      <p class="page-lede">Monocular VO on an XFeat/LighterGlue frontend, NetVLAD loop closure, and a C++ GTSAM factor-graph backend: ~95 m to ~1.2 m ATE on KITTI.</p>
       <div class="tag-row"><span class="tag">C++</span><span class="tag">GTSAM</span><span class="tag">PyTorch</span><span class="tag">OpenCV</span><span class="tag">XFeat</span><span class="tag">NetVLAD</span><span class="tag">FAISS</span><span class="tag">CMake</span></div>
       <div class="pub-actions"></div>
       <div class="prose">
@@ -57,29 +57,29 @@ sudden rotation, and no reliable depth sensor.</p>
 <p>Two decisions drive the design. Classical hand-crafted detectors (ORB, SIFT) degrade badly under
 blur, so the frontend runs <strong>learned features</strong>. And the backend is a <strong>factor
 graph</strong> rather than a filter, so loop closures and sparse depth can correct drift
-<em>retroactively</em> — a filter would have already marginalized that information away.</p>
+<em>retroactively</em>; a filter would have already marginalized that information away.</p>
 
 <h2>What each stage does</h2>
 <ul>
-<li><strong>VO frontend</strong> — XFeat keypoints with LighterGlue matching per frame pair, then
+<li><strong>VO frontend:</strong> XFeat keypoints with LighterGlue matching per frame pair, then
 <code>findEssentialMat</code> (RANSAC) and <code>recoverPose</code> for relative rotation and
 translation. Translation is unit-norm; metric scale is recovered later in the backend.</li>
-<li><strong>Simulated ToF depth</strong> — rather than relying on a 360° LiDAR the wearable does
+<li><strong>Simulated ToF depth:</strong> rather than relying on a 360° LiDAR the wearable does
 not have, depth comes from the stereo pair via OpenCV SGBM disparity
 (<code>Z = fx · baseline / d</code>), sampled on a 4×4 grid over the central image region to emit
 16 <code>(u, v, Z)</code> tuples per frame.</li>
-<li><strong>Place recognition</strong> — every 10th frame becomes a keyframe with a 64-cluster
+<li><strong>Place recognition:</strong> every 10th frame becomes a keyframe with a 64-cluster
 NetVLAD descriptor (VGG16 conv5_3 → NetVLAD → L2-normalized, dim 32768), indexed in FAISS. Top-5 L2
 search, rejecting anything within 100 frames of the current pose.</li>
-<li><strong>Loop verification</strong> — candidates are re-matched with XFeat and pose-checked,
+<li><strong>Loop verification:</strong> candidates are re-matched with XFeat and pose-checked,
 accepted only at ≥150 RANSAC inliers <strong>and</strong> ≥0.25 inlier ratio. Only the rotation is
 kept: the loop factor uses tight rotation noise (σ = 0.1 rad) and effectively-free translation
 (σ = 100 m), so metric scale stays anchored to GPS and depth rather than leaking in through loop
 closures.</li>
-<li><strong>C++ GTSAM backend</strong> — a <code>NonlinearFactorGraph</code> combining a prior at
+<li><strong>C++ GTSAM backend:</strong> a <code>NonlinearFactorGraph</code> combining a prior at
 the origin, <code>BetweenFactorPose3</code> odometry with noise scaled by inverse inlier ratio,
 <code>GenericProjectionFactor</code> for each depth point under a Huber-robust 4px cost, periodic
-<code>GPSFactor</code> constraints, and loop-closure between-factors — solved with
+<code>GPSFactor</code> constraints, and loop-closure between-factors, solved with
 Levenberg–Marquardt.</li>
 </ul>
 
